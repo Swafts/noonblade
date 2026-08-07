@@ -102,6 +102,11 @@ section{padding:90px 20px;position:relative;}
 .table code{color:#c084fc;background:rgba(168,85,247,.12);padding:6px 12px;border-radius:7px;font-family:"Consolas",monospace;font-size:.9rem;cursor:pointer;transition:background .2s;white-space:nowrap;}
 .table code:hover{background:rgba(168,85,247,.25);}
 .table .desc{color:var(--gray);}
+.table .desc{flex:1;min-width:0;}
+.table .ver-dl{flex-shrink:0;}
+.latest-tag{display:inline-block;background:#22c55e;color:#fff;font-size:.66rem;font-weight:800;letter-spacing:.5px;padding:3px 8px;border-radius:999px;margin-left:8px;vertical-align:middle;}
+.btn-sm{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;font-size:.8rem;border-radius:8px;}
+.btn-sm svg{width:14px;height:14px;}
 
 .license-card{border-left:4px solid var(--purple);}
 .license-card h3{display:flex;align-items:center;gap:12px;}
@@ -157,6 +162,7 @@ footer a{color:var(--purple);}
     <a href="#features">Features</a>
     <a href="#commands">Commands</a>
     <a href="#license">License</a>
+    <a href="#versions">Versions</a>
   </div>
   <div class="nav-right">
     <a href="#" class="nav-cta" data-download>Download</a>
@@ -274,6 +280,20 @@ footer a{color:var(--purple);}
   </div>
 </section>
 
+<section id="versions" style="background:#101018;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h2>VERSIONS</h2>
+      <p>Download the latest release, or grab a specific older build.</p>
+    </div>
+    <div class="table reveal">
+      <div class="row"><div class="code-cell"><code>v1.0.3</code> <span class="latest-tag">LATEST</span></div><div class="desc">Invsee fix · /noonblade help · /noonblade skin set · 60-min key expiry</div><div class="ver-dl"><a href="#" class="btn btn-purple btn-sm" data-version-download="versions/Noonblade-1.0.3.jar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</a></div></div>
+      <div class="row"><div class="code-cell"><code>v1.0.0</code></div><div class="desc">Original release — core menu, kits, parkour, player management.</div><div class="ver-dl"><a href="#" class="btn btn-purple btn-sm" data-version-download="versions/Noonblade-1.0.0.jar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</a></div></div>
+    </div>
+  </div>
+</section>
+
 <footer>Noonblade SMP · Premium Minecraft SMP management plugin · Not affiliated with Mojang or Microsoft</footer>
 
 <div class="toast" id="toast">Copied!</div>
@@ -284,7 +304,7 @@ footer a{color:var(--purple);}
       <div class="modal-logo"><img src="froke-smp.png" alt="Noonblade"></div>
       <div class="modal-title-block">
         <div class="modal-name">Noonblade SMP</div>
-        <div class="modal-tag">Official Server Plugin &middot; v1.0.0</div>
+        <div class="modal-tag">Official Server Plugin &middot; v1.0.3</div>
       </div>
       <button class="modal-close" id="keyModalClose" aria-label="Close">&times;</button>
     </div>
@@ -346,12 +366,16 @@ const errEl=document.getElementById('keyError');
 const errText=errEl.querySelector('span');
 const submit=document.getElementById('keySubmit');
 let downloading=false;
+let pendingFile='Noonblade.jar';
 
 function openModal(){errEl.classList.remove('show');input.value='';modal.classList.add('show');input.focus();}
 function closeModal(){modal.classList.remove('show');}
 
 document.querySelectorAll('[data-download]').forEach(a=>{
-  a.addEventListener('click',e=>{e.preventDefault();openModal();});
+  a.addEventListener('click',e=>{e.preventDefault();pendingFile='Noonblade.jar';openModal();});
+});
+document.querySelectorAll('[data-version-download]').forEach(a=>{
+  a.addEventListener('click',e=>{e.preventDefault();pendingFile=a.getAttribute('data-version-download');openModal();});
 });
 document.getElementById('keyModalClose').addEventListener('click',closeModal);
 const DISCORD_URL='https://discord.com/channels/1500056296861204531/1535241074862198854';
@@ -392,8 +416,8 @@ function downloadFile(){
   submit.textContent='Download';
   downloading=true;
   const a=document.createElement('a');
-  a.href='Noonblade.jar';
-  a.download='Noonblade.jar';
+  a.href=pendingFile;
+  a.download=pendingFile.split('/').pop();
   document.body.appendChild(a);
   a.click();
   a.remove();
