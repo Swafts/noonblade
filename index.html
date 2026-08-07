@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noonblade Plugin</title>
+<link rel="icon" type="image/png" href="froke-smp.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0D0D12;--card:#15151d;--border:#232330;--purple:#a855f7;--blue:#3b82f6;--green:#22c55e;--yellow:#eab308;--red:#ef4444;--pink:#ec4899;--gray:#a3a3b0;--text:#e5e5ec;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:"Inter","Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--purple);color:#fff;}
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:5px;}
+::-webkit-scrollbar-thumb:hover{background:var(--purple);}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:rgba(13,13,18,.7);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s;}
+nav.scrolled{border-color:var(--border);background:rgba(13,13,18,.92);}
+nav .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;}
+nav .brand svg{width:26px;height:26px;}
+nav .links{display:flex;gap:26px;font-size:.92rem;color:var(--gray);}
+nav .links a{transition:color .2s;}
+nav .links a:hover{color:var(--purple);}
+nav .nav-cta{padding:9px 18px;border-radius:8px;background:linear-gradient(135deg,#9333ea,#a855f7);color:#fff;font-weight:600;font-size:.88rem;box-shadow:0 4px 18px rgba(147,51,234,.4);}
+.nav-right{display:flex;align-items:center;gap:12px;}
+@media(max-width:700px){nav .links{display:none;}.nav-right{gap:8px;}}
+
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 20px 60px;overflow:hidden;}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(88,28,135,.45),transparent 55%),radial-gradient(circle at 80% 20%,rgba(30,64,175,.4),transparent 55%),linear-gradient(180deg,#0b0b12 0%,#10101a 55%,#0D0D12 100%);z-index:0;}
+#snow{position:fixed;inset:0;z-index:999;pointer-events:none;overflow:hidden;}
+#snow span{position:absolute;top:-15px;border-radius:50%;opacity:.95;animation:fall linear infinite;}
+@keyframes fall{to{transform:translateY(110vh);opacity:.2;}}
+.hero>*{position:relative;z-index:1;}
+.hero-logo{width:96px;height:96px;border-radius:18px;background:linear-gradient(135deg,#3b82f6,#a855f7);display:flex;align-items:center;justify-content:center;margin-bottom:30px;box-shadow:0 0 50px rgba(99,102,241,.55);animation:logoPulse 3s ease-in-out infinite;}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 40px rgba(99,102,241,.5);}50%{box-shadow:0 0 70px rgba(168,85,247,.7);}}
+.hero-logo svg{width:52px;height:52px;}
+.hero-img{width:110px;height:110px;object-fit:cover;border-radius:18px;margin:0 auto 28px;display:block;box-shadow:0 0 40px rgba(99,102,241,.5);}
+.hero h1{font-family:"Press Start 2P",monospace;font-size:clamp(2rem,9vw,5rem);letter-spacing:3px;line-height:1.3;background:linear-gradient(90deg,#60a5fa,#c084fc,#f0abfc,#60a5fa);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s linear infinite;}
+@keyframes shimmer{to{background-position:300% 0;}}
+.hero .tag{margin-top:22px;font-size:.8rem;color:var(--purple);letter-spacing:4px;text-transform:uppercase;font-weight:600;}
+.hero p.sub{max-width:700px;color:var(--gray);font-size:1.15rem;margin:18px auto 38px;}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:10px;font-weight:600;font-size:1rem;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s,filter .2s;position:relative;}
+.btn:hover{transform:translateY(-3px) scale(1.02);filter:brightness(1.1);}
+.btn:active{transform:translateY(0) scale(.98);}
+.btn svg{width:18px;height:18px;}
+.btn-purple{background:linear-gradient(135deg,#9333ea,#a855f7);color:#fff;box-shadow:0 8px 30px rgba(147,51,234,.45);}
+.btn-big{padding:22px 52px;font-size:1.3rem;border-radius:14px;box-shadow:0 12px 45px rgba(147,51,234,.55);}
+.btn-blue{background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;box-shadow:0 8px 30px rgba(59,130,246,.45);}
+.btn::after{content:"";position:absolute;inset:-1px;border-radius:10px;border:1px solid rgba(255,255,255,.25);opacity:0;transition:opacity .2s;}
+.btn:hover::after{opacity:1;}
+.hero-notes{margin-top:32px;color:var(--gray);font-size:.95rem;display:flex;gap:24px;flex-wrap:wrap;justify-content:center;}
+.hero-notes span{display:inline-flex;align-items:center;gap:8px;}
+.hero-notes span::before{content:"●";color:var(--purple);font-size:.6rem;animation:pulse 2s infinite;}
+@keyframes pulse{50%{opacity:.3;}}
+.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--gray);font-size:.8rem;animation:bob 2s ease-in-out infinite;letter-spacing:2px;}
+@keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,8px);}}
+
+.banner{background:linear-gradient(90deg,rgba(88,28,135,.95),rgba(76,29,149,.95),rgba(88,28,135,.95));border-top:1px solid rgba(168,85,247,.5);border-bottom:1px solid rgba(168,85,247,.5);color:#e9d5ff;text-align:center;padding:20px;font-size:1rem;font-weight:500;}
+.banner strong{color:#fff;}
+
+section{padding:90px 20px;position:relative;}
+.wrap{max-width:1100px;margin:0 auto;}
+.section-head{text-align:center;margin-bottom:52px;}
+.section-head .icon{display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:16px;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);margin-bottom:16px;}
+.section-head .icon svg{width:28px;height:28px;color:var(--purple);}
+.section-head h2{font-family:"Press Start 2P",monospace;font-size:clamp(1.2rem,4vw,2rem);line-height:1.5;}
+.section-head p{color:var(--gray);margin-top:14px;font-size:1.05rem;}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+.grid{display:grid;gap:22px;}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.grid-2{grid-template-columns:repeat(2,1fr);}
+@media(max-width:900px){.grid-3{grid-template-columns:1fr;}.grid-2{grid-template-columns:1fr;}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;overflow:hidden;}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-accent,var(--purple));opacity:.6;}
+.card:hover{transform:translateY(-6px);border-color:var(--card-accent,var(--purple));box-shadow:0 12px 40px -12px var(--card-glow,rgba(168,85,247,.5));}
+.card h3{display:flex;align-items:center;gap:12px;font-size:1.15rem;margin-bottom:14px;}
+.card h3 svg{width:22px;height:22px;flex-shrink:0;color:var(--card-accent,var(--purple));}
+.card ul{list-style:none;}
+.card ul li{color:var(--gray);padding:7px 0 7px 22px;position:relative;font-size:.95rem;}
+.card ul li::before{content:"▸";position:absolute;left:0;color:var(--card-accent,var(--purple));}
+.c-purple{--card-accent:var(--purple);--card-glow:rgba(168,85,247,.5);}
+.c-green{--card-accent:var(--green);--card-glow:rgba(34,197,94,.5);}
+.c-blue{--card-accent:var(--blue);--card-glow:rgba(59,130,246,.5);}
+.c-red{--card-accent:var(--red);--card-glow:rgba(239,68,68,.5);}
+.c-yellow{--card-accent:var(--yellow);--card-glow:rgba(234,179,8,.5);}
+.c-pink{--card-accent:var(--pink);--card-glow:rgba(236,72,153,.5);}
+
+.table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px -30px rgba(0,0,0,.8);}
+.table .row{display:flex;align-items:center;gap:20px;padding:20px 26px;border-bottom:1px solid var(--border);transition:background .2s;}
+.table .row:last-child{border-bottom:none;}
+.table .row:hover{background:rgba(168,85,247,.06);}
+.table .code-cell{width:42%;flex-shrink:0;}
+.table code{color:#c084fc;background:rgba(168,85,247,.12);padding:6px 12px;border-radius:7px;font-family:"Consolas",monospace;font-size:.9rem;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.table code:hover{background:rgba(168,85,247,.25);}
+.table .desc{color:var(--gray);}
+
+.license-card{border-left:4px solid var(--purple);}
+.license-card h3{display:flex;align-items:center;gap:12px;}
+.license-card h3 svg{width:22px;height:22px;color:var(--purple);}
+.license-card p{color:var(--gray);font-size:.97rem;}
+
+.cta{background:linear-gradient(135deg,rgba(88,28,135,.7),rgba(76,29,149,.7));border:1px solid rgba(168,85,247,.45);border-radius:20px;text-align:center;padding:56px 30px;margin-top:64px;position:relative;overflow:hidden;}
+.cta>*{position:relative;}
+.cta .thumb{width:70px;height:70px;border-radius:14px;margin:0 auto 20px;background:linear-gradient(135deg,#3b82f6,#a855f7);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(147,51,234,.6);overflow:hidden;}
+.cta .thumb img{width:100%;height:100%;object-fit:cover;}
+.cta h2{font-family:"Press Start 2P",monospace;font-size:1.4rem;line-height:1.6;margin-bottom:14px;}
+.cta p{color:var(--gray);max-width:560px;margin:0 auto 32px;}
+
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--purple);color:var(--text);padding:12px 22px;border-radius:10px;z-index:200;opacity:0;transition:all .35s ease;box-shadow:0 10px 40px rgba(0,0,0,.6);}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+.modal-overlay{position:fixed;inset:0;background:rgba(5,5,10,.82);backdrop-filter:blur(8px);z-index:300;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.show{display:flex;}
+.modal{position:relative;width:100%;max-width:560px;background:#17171f;border:1px solid #2a2a35;border-radius:16px;box-shadow:0 40px 100px -20px rgba(0,0,0,.95);animation:modalIn .22s ease;overflow:hidden;}
+@keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.98);}to{opacity:1;transform:translateY(0) scale(1);}}
+.modal-head{display:flex;align-items:center;gap:14px;padding:20px 24px;border-bottom:1px solid var(--border);}
+.modal-logo{width:46px;height:46px;border-radius:10px;overflow:hidden;flex-shrink:0;border:1px solid var(--border);}
+.modal-logo img{width:100%;height:100%;object-fit:cover;}
+.modal-title-block{flex:1;min-width:0;}
+.modal-name{font-size:1.02rem;font-weight:700;}
+.modal-tag{color:#8b8b96;font-size:.78rem;margin-top:2px;}
+.modal-close{background:none;border:none;color:#8b8b96;font-size:1.4rem;line-height:1;cursor:pointer;transition:color .2s;flex-shrink:0;}
+.modal-close:hover{color:#fff;}
+.modal-body{padding:20px 24px;}
+.modal-desc{color:var(--gray);font-size:.9rem;line-height:1.55;margin-bottom:16px;}
+.modal-actions{display:flex;flex-direction:column;gap:10px;}
+.modal-key-row{display:flex;gap:10px;}
+.modal-input{flex:1;background:#0d0d14;border:1px solid #2a2a35;border-radius:9px;color:var(--text);font-size:.95rem;font-family:"Consolas",monospace;letter-spacing:1px;text-align:center;padding:12px;outline:none;transition:border-color .2s,box-shadow .2s;min-width:0;}
+.modal-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(168,85,247,.15);}
+.modal-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:9px;font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:filter .2s,background .2s;}
+.modal-btn svg{width:16px;height:16px;}
+.modal-btn-primary{background:linear-gradient(135deg,#7c3aed,#8b5cf6);color:#fff;}
+.modal-btn-primary:hover{filter:brightness(1.1);}
+.modal-btn-ghost{background:#1c1c26;border:1px solid #2f2f3b;color:var(--text);}
+.modal-btn-ghost:hover{background:#23232f;}
+.modal-key-hint{color:var(--gray);font-size:.82rem;text-align:center;margin-top:6px;}
+.modal-error{display:none;align-items:center;gap:7px;background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.3);color:var(--red);font-size:.84rem;font-weight:500;padding:9px 12px;border-radius:8px;margin-bottom:10px;}
+.modal-error.show{display:flex;}
+.modal-error svg{width:14px;height:14px;flex-shrink:0;}
+footer{text-align:center;padding:44px 20px;color:#6b6b78;font-size:.9rem;border-top:1px solid var(--border);}
+footer a{color:var(--purple);}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V4.5l9 4 9-4V21"></path><path d="M3 21h18"></path></svg> Noonblade SMP</a>
+  <div class="links">
+    <a href="#features">Features</a>
+    <a href="#commands">Commands</a>
+    <a href="#license">License</a>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="nav-cta" data-download>Download</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="snow" id="snow"></div>
+  <img src="froke-smp.png" alt="Froke SMP" class="hero-img">
+  <h1>NOONBLADE</h1>
+  <div class="tag">Premium SMP Plugin</div>
+  <p class="sub">A premium all-in-one SMP management plugin for Minecraft servers — combining parkour, player management, kit systems, custom weapons, and full server control into one easy menu.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-purple btn-big" data-download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Plugin</a>
+      </div>
+  <div class="hero-notes">
+    <span>Paper 1.20.4 → 26.2</span>
+    <span>License required</span>
+    <span>Drop in &amp; restart</span>
+  </div>
+  <div class="scroll-hint">▼ SCROLL</div>
+</header>
+
+<div class="banner">
+  <strong>✓ Built against the Paper API</strong> · Tested on Paper 1.20.4 + 26.2 · <strong>Drop in. restart. done.</strong>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+      <h2>EVERYTHING YOU NEED</h2>
+      <p>Six powerful modules, one plugin. No fluff, no fragmentation.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card c-purple reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Player Management</h3>
+        <ul><li>Browse every online player and click to manage</li><li>Invsee — view and edit any player's inventory</li><li>Kick, Ban, Warn with typed durations and reasons</li><li>Trust levels 1–5, each unlocking more permissions</li></ul>
+      </div>
+      <div class="card c-green reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Parkour &amp; Checkpoints</h3>
+        <ul><li>Placeable checkpoint plates (4 types)</li><li>Falls below limit? Teleport back to latest checkpoint</li><li>Auto-granted "Return to Spawn" item</li><li>Give-up mechanic built in</li></ul>
+      </div>
+      <div class="card c-blue reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg> Kits &amp; Templates</h3>
+        <ul><li>Full kit editor: armor, offhand, 27 slots + hotbar</li><li>Apply kit to all eligible players in one click</li><li>Import from inventory, clear editor, clear all kits</li><li>16 shulker color templates — nameable, loadable, deletable</li></ul>
+      </div>
+      <div class="card c-red reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Custom Weapons</h3>
+        <ul><li>Kinetic Arrow Shooter — fires a 20-arrow volley</li><li>Strips armor on hit</li><li>One-use bow, carefully balanced for SMP play</li></ul>
+      </div>
+      <div class="card c-yellow reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Server Controls</h3>
+        <ul><li>PVP toggle — ops and trusted always bypass</li><li>Wither Sound — ambient growl with adjustable range</li><li>Death Messages — fake "died/left" broadcasts</li><li>Difficulty / Time / Weather with auto-revert</li></ul>
+      </div>
+      <div class="card c-pink reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Automatic Systems</h3>
+        <ul><li>Join handling — untrusted players cleared &amp; teleported to spawn</li><li>Spawn protection — block breaking near spawn</li><li>3 warnings = 30-second spectator penalty</li><li>Dynamic MOTD with live player count gradient</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="commands" style="background:#101018;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      <h2>COMMANDS</h2>
+      <p>Everything ops need, nothing they don't.</p>
+    </div>
+    <div class="table reveal">
+      <div class="row"><div class="code-cell"><code>/noonblade</code></div><div class="desc">Opens the main control menu</div></div>
+      <div class="row"><div class="code-cell"><code>/noonblade activate &lt;key&gt;</code></div><div class="desc">Activate your license key</div></div>
+      <div class="row"><div class="code-cell"><code>/noonblade trust &lt;player&gt; &lt;1-5&gt;</code></div><div class="desc">Set a player's trust level (ops)</div></div>
+      <div class="row"><div class="code-cell"><code>/noonblade untrust &lt;player&gt;</code></div><div class="desc">Remove a player's trust (ops)</div></div>
+      <div class="row"><div class="code-cell"><code>/noonblade reload</code></div><div class="desc">Reload all configs, kits, templates, warnings, checkpoints (ops)</div></div>
+      <div class="row"><div class="code-cell"><code>/warn &lt;player&gt; &lt;reason&gt;</code></div><div class="desc">Warn a player (ops + trusted)</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="license">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <h2>LICENSE SYSTEM</h2>
+      <p>Keys are managed through Discord — fast, secure, and instant.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card license-card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Get a key</h3>
+        <p>Apply in the Discord server — keys are generated automatically via the Noonblade bot.</p>
+      </div>
+      <div class="card license-card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> 1 key = 1 server</h3>
+        <p>The first server to activate a key owns it permanently. Sharing it with another server returns "invalid".</p>
+      </div>
+      <div class="card license-card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Instant revocation</h3>
+        <p>Rotate or ban a key from Discord and the plugin disables within seconds.</p>
+      </div>
+      <div class="card license-card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Auto checks every 5s</h3>
+        <p>The plugin re-validates in the background on every server. Bans take effect almost instantly.</p>
+      </div>
+    </div>
+    <div class="cta reveal" id="download">
+      <div class="thumb"><img src="froke-smp.png" alt="Froke SMP"></div>
+      <h2>READY TO RUN NOONBLADE?</h2>
+      <p>Download the plugin, drop the .jar into your plugins/ folder, restart, and activate your license key.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-purple btn-big" data-download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Plugin</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Noonblade SMP · Premium Minecraft SMP management plugin · Not affiliated with Mojang or Microsoft</footer>
+
+<div class="toast" id="toast">Copied!</div>
+
+<div class="modal-overlay" id="keyModal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-logo"><img src="froke-smp.png" alt="Noonblade"></div>
+      <div class="modal-title-block">
+        <div class="modal-name">Noonblade SMP</div>
+        <div class="modal-tag">Official Server Plugin &middot; v1.0.0</div>
+      </div>
+      <button class="modal-close" id="keyModalClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-desc">One menu for everything on your SMP &mdash; all settings and tools in one clean GUI.</div>
+      <div class="modal-actions">
+        <div class="modal-error" id="keyError">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span>Incorrect key. Please try again.</span>
+        </div>
+        <div class="modal-key-row">
+          <input type="text" id="keyInput" class="modal-input" placeholder="Enter license key" autocomplete="off" spellcheck="false">
+          <button class="modal-btn modal-btn-primary" id="keySubmit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</button>
+        </div>
+        <div class="modal-key-hint">Need a license key?</div>
+        <button class="modal-btn modal-btn-ghost" id="keyDiscordBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.32 4.37a19.8 19.8 0 0 0-4.93-1.51 13.77 13.77 0 0 0-.64 1.28 18.27 18.27 0 0 0-5.5 0 12.64 12.64 0 0 0-.64-1.28 19.74 19.74 0 0 0-4.93 1.51C.53 9.05-.32 13.58.1 18.06a19.9 19.9 0 0 0 6.02 3.03 14.46 14.46 0 0 0 1.24-2 12.82 12.82 0 0 1-1.95-.94c.16-.12.32-.24.48-.37a14.18 14.18 0 0 0 12.12 0c.16.13.32.25.48.37a12.82 12.82 0 0 1-1.95.94 14.4 14.4 0 0 0 1.24 2 19.87 19.87 0 0 0 6.02-3.03c.5-5.19-.85-9.69-3.6-13.69zM8.02 15.33c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.96-2.42 2.16-2.42s2.17 1.09 2.16 2.42c0 1.34-.96 2.42-2.16 2.42zm7.96 0c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.95-2.42 2.16-2.42s2.17 1.09 2.16 2.42c0 1.34-.95 2.42-2.16 2.42z"/></svg>Join Discord Community</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const nav=document.getElementById('nav');
+const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>40);
+window.addEventListener('scroll',onScroll);onScroll();
+
+const revealEls=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}),{threshold:0.12});
+revealEls.forEach(el=>io.observe(el));
+
+const snowEl=document.getElementById('snow');
+for(let i=0;i<60;i++){
+  const f=document.createElement('span');
+  const s=(Math.random()*4+4).toFixed(1);
+  f.style.width=s+'px';
+  f.style.height=s+'px';
+  f.style.left=Math.random()*100+'%';
+  f.style.background=Math.random()<0.5?'#ffffff':'#c7d2fe';
+  f.style.animationDuration=(Math.random()*6+4).toFixed(1)+'s';
+  f.style.animationDelay=(-Math.random()*10).toFixed(1)+'s';
+  f.style.filter='drop-shadow(0 0 6px rgba(192,132,252,.8))';
+  snowEl.appendChild(f);
+}
+
+const toast=document.getElementById('toast');
+document.querySelectorAll('.table code').forEach(code=>{
+  code.addEventListener('click',()=>{
+    navigator.clipboard.writeText(code.textContent.trim());
+    toast.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t=setTimeout(()=>toast.classList.remove('show'),1400);
+  });
+});
+
+const API_URL='https://swimming-substances-heather-documented.trycloudflare.com/api/check';
+const modal=document.getElementById('keyModal');
+const input=document.getElementById('keyInput');
+const errEl=document.getElementById('keyError');
+const errText=errEl.querySelector('span');
+const submit=document.getElementById('keySubmit');
+let downloading=false;
+
+function openModal(){errEl.classList.remove('show');input.value='';modal.classList.add('show');input.focus();}
+function closeModal(){modal.classList.remove('show');}
+
+document.querySelectorAll('[data-download]').forEach(a=>{
+  a.addEventListener('click',e=>{e.preventDefault();openModal();});
+});
+document.getElementById('keyModalClose').addEventListener('click',closeModal);
+const DISCORD_URL='https://discord.com/channels/1500056296861204531/1535241074862198854';
+document.getElementById('keyDiscordBtn').addEventListener('click',()=>window.open(DISCORD_URL,'_blank'));
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+input.addEventListener('keydown',e=>{if(e.key==='Enter')verifyKey();});
+submit.addEventListener('click',verifyKey);
+
+async function verifyKey(){
+  if(downloading)return;
+  const key=input.value.trim();
+  if(!key){errText.textContent='Please enter a key.';errEl.classList.add('show');return;}
+  submit.disabled=true;
+  submit.textContent='Checking...';
+  errEl.classList.remove('show');
+  try{
+    const res=await fetch(API_URL+'?key='+encodeURIComponent(key));
+    const data=await res.json();
+    if(data.valid){
+      downloadFile();
+    }else{
+      errText.textContent='Incorrect key. Please try again.';
+      errEl.classList.add('show');
+      submit.disabled=false;
+      submit.textContent='Download';
+      input.focus();
+    }
+  }catch(err){
+    errText.textContent='Could not reach license server. Try again in a moment.';
+    errEl.classList.add('show');
+    submit.disabled=false;
+    submit.textContent='Download';
+  }
+}
+
+function downloadFile(){
+  submit.disabled=false;
+  submit.textContent='Download';
+  downloading=true;
+  const a=document.createElement('a');
+  a.href='Noonblade.jar';
+  a.download='Noonblade.jar';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  closeModal();
+  toast.textContent='Downloading...';
+  toast.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t=setTimeout(()=>toast.classList.remove('show'),1600);
+  setTimeout(()=>{downloading=false;},1500);
+}
+</script>
+</body>
+</html>
