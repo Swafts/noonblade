@@ -371,15 +371,16 @@ const errText=errEl.querySelector('span');
 const submit=document.getElementById('keySubmit');
 let downloading=false;
 let pendingFile='Noonblade.jar';
+let pendingName='Noonblade-1.0.3.jar';
 
 function openModal(){errEl.classList.remove('show');input.value='';modal.classList.add('show');input.focus();}
 function closeModal(){modal.classList.remove('show');}
 
 document.querySelectorAll('[data-download]').forEach(a=>{
-  a.addEventListener('click',e=>{e.preventDefault();pendingFile='Noonblade.jar';openModal();});
+  a.addEventListener('click',e=>{e.preventDefault();pendingFile='Noonblade.jar';pendingName='Noonblade-1.0.3.jar';openModal();});
 });
 document.querySelectorAll('[data-version-download]').forEach(a=>{
-  a.addEventListener('click',e=>{e.preventDefault();pendingFile=a.getAttribute('data-version-download');openModal();});
+  a.addEventListener('click',e=>{e.preventDefault();pendingFile=a.getAttribute('data-version-download');pendingName=pendingFile.split('/').pop();openModal();});
 });
 document.getElementById('keyModalClose').addEventListener('click',closeModal);
 const DISCORD_URL='https://discord.com/channels/1500056296861204531/1535241074862198854';
@@ -421,7 +422,7 @@ function downloadFile(){
   downloading=true;
   const a=document.createElement('a');
   a.href=pendingFile;
-  a.download=pendingFile.split('/').pop();
+  a.download=pendingName;
   document.body.appendChild(a);
   a.click();
   a.remove();
