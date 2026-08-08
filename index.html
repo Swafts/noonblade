@@ -161,10 +161,18 @@ footer .legal-toggle:hover{background:rgba(255,255,255,.04);}
 footer .legal-toggle::after{content:"+";font-size:1.2rem;color:var(--purple);transition:transform .2s;}
 footer .legal-item.open .legal-toggle::after{transform:rotate(45deg);}
 footer .legal-body{display:none;padding:0 18px 16px;font-size:.88rem;line-height:1.6;color:#9a9aa8;}
-footer .legal-item.open .legal-body{display:block;}
+footer .legal-item.open .legal-body{display:block;max-height:60vh;overflow-y:auto;}
+footer .legal-body h3{margin:0 0 12px;font-size:1.05rem;color:var(--text);}
+footer .legal-body h4{margin:18px 0 8px;font-size:.92rem;color:var(--text);}
+footer .legal-meta{margin:0 0 14px;color:#6b6b78;font-size:.82rem;}
 footer .legal-body p{margin:0 0 10px;}
-footer .legal-body ul{margin:0;padding-left:20px;}
-footer .legal-body li{margin-bottom:6px;}
+footer .legal-body ul{margin:0 0 10px;padding-left:20px;}
+footer .legal-body ol{margin:0 0 10px;padding-left:22px;}
+footer .legal-body li{margin-bottom:6px;color:#8a8a98;}
+footer .legal-body code{background:rgba(168,85,247,.12);padding:1px 6px;border-radius:5px;font-size:.85rem;color:var(--purple);}
+footer .legal-body a{color:var(--purple);}
+footer .legal-body a:hover{text-decoration:underline;}
+footer .legal-body p strong{color:#b9b9c6;}
 footer .footer-base{border-top:1px solid var(--border);padding-top:20px;font-size:.85rem;}
 </style>
 </head>
@@ -316,36 +324,217 @@ footer .footer-base{border-top:1px solid var(--border);padding-top:20px;font-siz
 <footer>
   <div class="legal">
     <div class="legal-item">
-      <button class="legal-toggle" data-legal="copyright">Copyright</button>
+      <button class="legal-toggle" data-legal="copyright">Copyright &amp; License Notice</button>
       <div class="legal-body" id="legal-copyright">
-        <p>&copy; <span id="year"></span> Noonblade SMP. All rights reserved.</p>
-        <p>Noonblade SMP is the exclusive property of its creator. Any public use, redistribution, re-upload, resale, or publication of this plugin — or any part of its code, design, or assets — is strictly prohibited.</p>
-        <p><strong>Legal notice:</strong> If you use Noonblade for any public purpose without explicit written permission, you will be sued. Unauthorized use is subject to full legal action including claims for damages.</p>
+        <h3>Copyright &amp; License Notice</h3>
+        <p class="legal-meta">Effective Date: August 8, 2026<br>Last Updated: August 8, 2026<br>Version: 1.0</p>
+        <p>Noonblade SMP is a source-available Minecraft plugin distributed under a custom license. The source code is publicly accessible for viewing, study, and private modification.</p>
+        <p><strong>Copyright &copy; 2026 Swafts. All rights reserved.</strong></p>
+        <p>Noonblade SMP ("Noonblade") is developed and maintained by Swafts. This notice applies to:</p>
+        <ul>
+          <li>The Noonblade source code and compiled binaries (Noonblade-*.jar)</li>
+          <li>Configuration templates and bundled resources</li>
+          <li>Documentation, wiki pages, and written materials</li>
+          <li>Official Noonblade websites and assets</li>
+          <li>Developer-created derivative works and modifications</li>
+        </ul>
+        <h4>License Summary</h4>
+        <p><strong>Permitted</strong></p>
+        <ul>
+          <li>Use the compiled plugin on servers you own or operate</li>
+          <li>Configure and operate the plugin</li>
+          <li>View and study the source code</li>
+          <li>Modify the source code for private/internal use</li>
+          <li>Create private forks for personal/internal use</li>
+        </ul>
+        <p><strong>Prohibited</strong></p>
+        <ul>
+          <li>Redistribute the plugin or modified versions</li>
+          <li>Sell or sublicense the plugin</li>
+          <li>Commercially redistribute the plugin</li>
+          <li>Remove attribution or copyright notices</li>
+          <li>Represent unofficial builds as official releases</li>
+        </ul>
+        <h4>Full License Text</h4>
+        <p><strong>Noonblade Source-Available License — Version 1.0</strong><br>Copyright &copy; 2026 Swafts</p>
+        <p><strong>1. Definitions.</strong> "Plugin" or "Noonblade" means the Noonblade SMP software, including source code, compiled binaries, documentation, configuration files, assets, and associated materials. "Developer" or "Licensor" means Swafts. "You" or "Licensee" means any person or legal entity that downloads, installs, accesses, modifies, or uses the Plugin. "Redistribute" means making the Plugin available to any third party in any form, including public repositories, download links, compiled distributions, mirrors, package managers, bundled software, or hosted services.</p>
+        <p><strong>2. License Grant.</strong> Subject to this License, the Developer grants You a limited, non-exclusive, non-transferable, non-sublicensable license to: (a) use and operate the Plugin on Minecraft servers You own or manage; (b) configure and modify the Plugin for private or internal use; (c) view and study the source code for educational and development purposes; (d) create private forks for internal use only.</p>
+        <p><strong>3. Restrictions.</strong> You may NOT: (a) redistribute the Plugin or modified versions; (b) sell, sublicense, lease, or commercially redistribute the Plugin; (c) publish unofficial builds claiming to be official releases; (d) remove or alter copyright, attribution, or license notices; (e) use the Plugin in violation of applicable laws or third-party licenses.</p>
+        <p><strong>4. Commercial Use.</strong> Running the Plugin on public or monetized Minecraft servers is permitted. However, the Plugin itself may NOT be sold, sublicensed, licensed for payment, commercially redistributed, or bundled into paid products or services without prior written permission from the Developer.</p>
+        <p><strong>5. Source Availability.</strong> The Plugin source code is publicly visible for reference, educational use, and private modification. This project is source-available software and is NOT open-source software.</p>
+        <p><strong>6. Third-Party Components.</strong> Third-party libraries, APIs, and dependencies included with or used by the Plugin remain subject to their own licenses and terms. Nothing in this License overrides rights granted under applicable third-party licenses.</p>
+        <p><strong>7. Attribution.</strong> When using the Plugin in any permitted form, the following attribution must be retained: "Noonblade SMP by Swafts — https://github.com/Swafts/noonblade"</p>
+        <p><strong>8. Intellectual Property.</strong> The Plugin and all associated materials remain the intellectual property of the Developer. No ownership rights are transferred under this License. All rights not expressly granted are reserved.</p>
+        <p><strong>9. Termination.</strong> This License automatically terminates if You materially violate its terms. Upon termination, You must cease all unauthorized redistribution and commercial distribution activities involving the Plugin.</p>
+        <p><strong>10. Disclaimer of Warranty.</strong> THE PLUGIN IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+        <p><strong>11. Limitation of Liability.</strong> TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE DEVELOPER SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING FROM USE OF THE PLUGIN.</p>
+        <p><strong>12. Governing Law.</strong> This License shall be governed by and interpreted under the laws applicable to the Developer's jurisdiction, without regard to conflict-of-law principles.</p>
+        <p><strong>13. Severability.</strong> If any provision of this License is determined unenforceable, the remaining provisions shall remain in full force and effect.</p>
+        <h4>Third-Party Licenses</h4>
+        <p>Noonblade may bundle, depend on, or integrate with the following third-party software components:</p>
+        <ul>
+          <li><strong>Spigot / Paper API</strong> — Author: SpigotMC / PaperMC contributors — License: GPL-3.0 / MIT — Purpose: Minecraft server development APIs</li>
+          <li><strong>Authlib</strong> — Author: Mojang AB / Microsoft — License: Proprietary — Purpose: GameProfile and skin data handling</li>
+        </ul>
+        <h4>Trademark Notice</h4>
+        <p>"Noonblade SMP", "Noonblade", and associated branding are identifiers of the Developer. You may refer to the Plugin in reviews, tutorials, or compatibility notes, and link to official project pages. You may NOT imply official endorsement or affiliation, use the branding for competing distributions, or present unofficial builds as official releases.</p>
+        <h4>Contact</h4>
+        <p>For copyright concerns or infringement notices, contact:<br>Discord: <a href="https://discord.com/channels/1500056296861204531/1535241074862198854">Noonblade SMP Discord</a><br>GitHub: <a href="https://github.com/Swafts/noonblade">github.com/Swafts/noonblade</a></p>
+        <p>Copyright &copy; 2026 Swafts. All rights reserved.<br>Noonblade SMP is not affiliated with Mojang AB or Microsoft Corporation.</p>
       </div>
     </div>
     <div class="legal-item">
       <button class="legal-toggle" data-legal="privacy">Privacy Policy</button>
       <div class="legal-body" id="legal-privacy">
-        <p>We respect your privacy. Noonblade does not collect, sell, or share any personal information beyond what is strictly required for the plugin to function.</p>
-        <p><strong>What we collect:</strong> To verify your license and secure your server, the plugin sends your license key, a unique server ID, and your server's player data to our license server for validation. This is used solely to check that your key is valid and bound to your server.</p>
-        <p><strong>What we do NOT collect:</strong> We do not collect passwords, chat messages, personal contact details, or any data unrelated to plugin functionality. We do not sell or share your data with third parties.</p>
+        <h3>Privacy Policy</h3>
+        <p class="legal-meta">Effective Date: August 8, 2026<br>Last Updated: August 8, 2026<br>Version: 1.0</p>
+        <p><strong>Quick Summary:</strong> Noonblade SMP ("Noonblade") is a server-side Minecraft plugin. We do not collect personal player data through the Plugin itself. All core Plugin data remains on infrastructure controlled by the server operator.</p>
+        <h4>Table of Contents</h4>
+        <ol>
+          <li>Definitions</li>
+          <li>Who We Are</li>
+          <li>Scope of This Policy</li>
+          <li>Information We Collect</li>
+          <li>How Information Is Used</li>
+          <li>Legal Basis for Processing (GDPR)</li>
+          <li>Data Storage &amp; Security</li>
+          <li>Data Retention</li>
+          <li>Third-Party Services</li>
+          <li>Cookies &amp; Tracking</li>
+          <li>Your Rights</li>
+          <li>California Privacy Rights (CCPA/CPRA)</li>
+          <li>Children's Privacy (COPPA)</li>
+          <li>International Data Transfers</li>
+          <li>Changes to This Policy</li>
+          <li>Contact Information</li>
+        </ol>
+        <h4>1. Definitions</h4>
+        <p>"Plugin" or "Noonblade" refers to the Noonblade SMP plugin. "Developer", "We", "Us", or "Our" refers to Swafts. "Server Operator" refers to the individual or organization operating a Minecraft server using Noonblade. "Player" refers to an end-user connecting to a Minecraft server. "Personal Data" has the meaning defined under applicable privacy laws including GDPR. "Plugin Data" means configuration files, database entries, backups, and related Plugin-generated data.</p>
+        <h4>2. Who We Are</h4>
+        <p>Noonblade SMP is developed and maintained by Swafts. Official project resources:<br>GitHub: <a href="https://github.com/Swafts/noonblade">https://github.com/Swafts/noonblade</a><br>Discord: <a href="https://discord.com/channels/1500056296861204531/1535241074862198854">Noonblade SMP Discord</a></p>
+        <h4>3. Scope of This Policy</h4>
+        <p>This Privacy Policy applies to the Noonblade plugin software and official websites/documentation. This Privacy Policy does NOT apply to third-party Minecraft servers using Noonblade, third-party plugins or extensions, unofficial forks or redistributions, or Mojang/Microsoft/Minecraft platform services. Server operators remain independently responsible for compliance with applicable privacy laws relating to their own players and infrastructure.</p>
+        <h4>4. Information We Collect</h4>
+        <p><strong>4.1 Plugin Data Stored Locally.</strong> Noonblade primarily stores data locally on infrastructure controlled by the server operator. Examples include:</p>
+        <ul>
+          <li>Player names and UUIDs — death list, immortality, player management</li>
+          <li>Configuration and toggle settings — respawn-on-death, PVP, record mode</li>
+          <li>Kit definitions and parkour checkpoint data — session and world state</li>
+          <li>Session timestamps — runtime/session tracking</li>
+        </ul>
+        <p>Noonblade does NOT intentionally collect or process: player chat messages, player IP addresses, email addresses, payment information, real-world identity information, or advertising identifiers.</p>
+        <p><strong>4.2 License Verification.</strong> To verify your license, Noonblade sends your license key, a unique server ID, and your server's player names to the Noonblade license service for validation. This is used solely to check that your key is valid and bound to your server.</p>
+        <p><strong>4.3 Website Access Logs.</strong> Official Noonblade websites may temporarily log IP addresses, browser User-Agent strings, request timestamps, requested pages, and HTTP status codes. Logs are used exclusively for security, abuse prevention, availability monitoring, and basic operational diagnostics. Logs are not used for advertising profiling or behavioral tracking.</p>
+        <h4>5. How Information Is Used</h4>
+        <ul>
+          <li><strong>Core Plugin functionality</strong> — Death List, immortality, kits, parkour, player management</li>
+          <li><strong>License activation</strong> — key validation and server binding</li>
+          <li><strong>Security and abuse prevention</strong> — website monitoring</li>
+          <li><strong>Compatibility support</strong> — API and version handling</li>
+        </ul>
+        <p>We do NOT sell personal information or use personal data for advertising purposes.</p>
+        <h4>6. Legal Basis for Processing (GDPR)</h4>
+        <p>For users in the EEA, UK, or Switzerland: core Plugin functionality is processed under legitimate interests; website security logging under legitimate interests; license verification under legitimate interests and/or contractual necessity.</p>
+        <h4>7. Data Storage &amp; Security</h4>
+        <p><strong>7.1 Local Storage.</strong> Plugin data is generally stored locally on the server operator's infrastructure, for example in the <code>plugins/Noonblade/</code> directory, as YAML configuration files. The Developer does not have direct access to server operator databases or local Plugin files.</p>
+        <p><strong>7.2 Security Recommendations.</strong> Server operators are responsible for securing their infrastructure: restrict file permissions, keep software updated, and maintain regular backups.</p>
+        <h4>8. Data Retention</h4>
+        <ul>
+          <li>Death list / immortality data — until manually removed via config or commands</li>
+          <li>Temporary cooldowns — memory-only / restart-cleared</li>
+          <li>Website access logs — limited retention period</li>
+        </ul>
+        <p>Server operators control retention of locally stored Plugin data.</p>
+        <h4>9. Third-Party Services</h4>
+        <p>Noonblade may interact with third-party services including: Vercel (website hosting), and Mojang/Microsoft APIs (skin and profile lookup). Each third-party service operates under its own privacy policies and terms.</p>
+        <h4>10. Cookies &amp; Tracking</h4>
+        <p><strong>Plugin:</strong> The Plugin itself does not use browser cookies, advertising trackers, or behavioral profiling systems. <strong>Website:</strong> Official websites may use minimal browser storage for functionality. No advertising or cross-site tracking technologies are intentionally used.</p>
+        <h4>11. Your Rights</h4>
+        <p>Depending on your jurisdiction, you may have rights including access, correction, deletion, restriction of processing, data portability, objection, and withdrawal of consent. Because most Plugin data is controlled locally by server operators, many requests should be directed to the relevant server operator.</p>
+        <h4>12. California Privacy Rights (CCPA/CPRA)</h4>
+        <p>California residents may have additional rights under applicable law. Noonblade does not knowingly sell personal information or share personal information for cross-context behavioral advertising. Most Plugin-related data remains under the direct control of server operators.</p>
+        <h4>13. Children's Privacy (COPPA)</h4>
+        <p>Noonblade is intended for server operators and administrators, not children under 13. We do not knowingly collect personal information from children. Server operators remain responsible for their own legal compliance relating to player communities.</p>
+        <h4>14. International Data Transfers</h4>
+        <p>Plugin data generally remains on infrastructure controlled by server operators. Some third-party services used by Noonblade may process requests internationally depending on their own infrastructure and policies.</p>
+        <h4>15. Changes to This Policy</h4>
+        <p>We may update this Privacy Policy periodically. Material changes may be announced through GitHub, Discord, or official documentation pages. The updated revision date will appear at the top of this document. Continued use of Noonblade after changes become effective constitutes acceptance of the revised policy.</p>
+        <h4>16. Contact Information</h4>
+        <p>For questions regarding this Privacy Policy:<br>Discord: <a href="https://discord.com/channels/1500056296861204531/1535241074862198854">Noonblade SMP Discord</a><br>GitHub: <a href="https://github.com/Swafts/noonblade">github.com/Swafts/noonblade</a></p>
+        <p>Noonblade SMP is not affiliated with Mojang AB or Microsoft Corporation.</p>
       </div>
     </div>
     <div class="legal-item">
-      <button class="legal-toggle" data-legal="terms">Terms &amp; Conditions</button>
+      <button class="legal-toggle" data-legal="terms">Terms of Service</button>
       <div class="legal-body" id="legal-terms">
-        <p>By downloading or using Noonblade you agree to the following terms:</p>
-        <ul>
-          <li>You must hold a valid, activated license key to use the plugin.</li>
-          <li>Each key is bound to exactly one server and may not be shared.</li>
-          <li>You may not re-upload, redistribute, modify, or claim ownership of the plugin.</li>
-          <li>Use is provided "as is", without warranty of any kind.</li>
-          <li>Violation of these terms may result in key revocation and legal action.</li>
-        </ul>
+        <h3>Terms of Service</h3>
+        <p class="legal-meta">Effective Date: August 8, 2026<br>Last Updated: August 8, 2026<br>Version: 1.0</p>
+        <p><strong>Important:</strong> Please read these Terms carefully before downloading, installing, or using Noonblade SMP ("Noonblade"). By using the Plugin, you agree to be legally bound by these Terms in their entirety.</p>
+        <h4>Table of Contents</h4>
+        <ol>
+          <li>Definitions</li>
+          <li>Eligibility</li>
+          <li>Acceptance of Terms</li>
+          <li>License Grant</li>
+          <li>Intellectual Property Rights</li>
+          <li>Permitted Use</li>
+          <li>Prohibited Conduct</li>
+          <li>Configuration and Data Ownership</li>
+          <li>Third-Party Services and Dependencies</li>
+          <li>Updates, Maintenance, and Support</li>
+          <li>Disclaimer of Warranties</li>
+          <li>Limitation of Liability</li>
+          <li>Indemnification</li>
+          <li>Termination</li>
+          <li>Dispute Resolution</li>
+          <li>Governing Law</li>
+          <li>General Provisions</li>
+          <li>Contact Information</li>
+        </ol>
+        <h4>1. Definitions</h4>
+        <p>"Plugin", "Noonblade", or "Noonblade SMP" refers to the Noonblade SMP software, including all binaries, source code, APIs, configuration files, assets, documentation, and associated materials. "Developer", "Licensor", "We", or "Us" refers to Swafts. "You" or "Licensee" refers to any person or legal entity that downloads, installs, configures, operates, or interacts with the Plugin. "Server" means any Minecraft server instance using the Plugin. "Commercial Use" means any use intended for commercial advantage, monetization, resale, paid hosting, SaaS distribution, licensing, or revenue generation. "Redistribution" means sharing, mirroring, uploading, republishing, bundling, transmitting, or otherwise distributing the Plugin or any modified version to third parties.</p>
+        <h4>2. Eligibility</h4>
+        <p>You must be at least 13 years old, or the minimum age required by your jurisdiction to consent to digital services. If You are using the Plugin on behalf of an organization, You represent that You have authority to bind that organization to these Terms.</p>
+        <h4>3. Acceptance of Terms</h4>
+        <p>You accept these Terms by downloading the Plugin, installing the Plugin, running the Plugin, or accessing the source repository or compiled releases. If You do not agree to these Terms, You must immediately stop using the Plugin and delete all copies from Your systems.</p>
+        <h4>4. License Grant</h4>
+        <p><strong>4.1 Limited License.</strong> Subject to these Terms and the Noonblade Source-Available License, You are granted a non-exclusive, non-transferable, non-sublicensable, revocable license to run the Plugin on Minecraft servers You own or directly operate, configure the Plugin using documented features, view and study the source code, and modify the source code solely for private, non-commercial use.</p>
+        <p><strong>4.2 Restrictions.</strong> You may NOT redistribute the Plugin in any form, rehost releases or source archives, sell or commercially exploit the Plugin, offer the Plugin as part of a paid hosting package, bundle the Plugin with commercial products or services, create public forks for redistribution, remove copyright notices, circumvent licensing restrictions, or misrepresent authorship or ownership.</p>
+        <p><strong>4.3 Permission Requests.</strong> Written permission is required for commercial use, redistribution, hosted distribution, and public derivative distribution. Permission requests may be submitted through the official Discord server.</p>
+        <p><strong>4.4 License Keys.</strong> Use of the Plugin requires a valid, activated license key. Each key is bound to exactly one server and may not be shared. Unbound keys expire automatically and keys may be revoked at the Developer's discretion.</p>
+        <h4>5. Intellectual Property Rights</h4>
+        <p>All rights, title, and interest in the Plugin remain exclusively owned by the Developer, including source code, compiled binaries, APIs, documentation, website assets, branding, and logos. "Noonblade SMP" and related branding are protected identifiers of the Developer. Any feedback, bug reports, suggestions, or ideas submitted to the Developer may be used without restriction or compensation.</p>
+        <h4>6. Permitted Use</h4>
+        <p>Permitted use cases include private servers, community or friend-group servers, testing, development, and demonstration. All usage must comply with the Mojang EULA, Microsoft policies, hosting provider terms, and applicable law.</p>
+        <h4>7. Prohibited Conduct</h4>
+        <p>You may NOT use the Plugin to violate Minecraft platform policies, manipulate public server rankings fraudulently, mislead users for financial gain, exploit vulnerabilities, attack third-party infrastructure, violate privacy or data protection law, facilitate scams or phishing, or distribute malware or malicious payloads.</p>
+        <h4>8. Configuration and Data Ownership</h4>
+        <p>You retain ownership of all Plugin Data stored on Your systems, including configuration files, databases, backups, and logs. Noonblade primarily stores data locally on Your infrastructure. The Developer does not receive or access Your server data unless explicitly provided by You for support purposes. You are solely responsible for maintaining backups and disaster recovery procedures.</p>
+        <h4>9. Third-Party Services and Dependencies</h4>
+        <p>Noonblade may interact with third-party services, including Mojang APIs for skin/profile retrieval and Vercel for website hosting. Third-party services operate under their own terms and privacy policies. We are not responsible for outages, changes, or issues caused by third-party services.</p>
+        <h4>10. Updates, Maintenance, and Support</h4>
+        <p>Updates are provided voluntarily and may include security patches, bug fixes, compatibility updates, and feature additions. We do not guarantee future updates or compatibility. Support is provided on a best-effort basis through the official Discord server and GitHub. Major changes may occur between releases; backward compatibility is not guaranteed.</p>
+        <h4>11. Disclaimer of Warranties</h4>
+        <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE PLUGIN IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND. We DISCLAIM all warranties including merchantability, fitness for a particular purpose, non-infringement, compatibility, security, reliability, and availability. Use of the Plugin is entirely at Your own risk.</p>
+        <h4>12. Limitation of Liability</h4>
+        <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE DEVELOPER SHALL NOT BE LIABLE FOR server crashes, data loss, lost revenue, hosting penalties, player disputes, corruption, downtime, security incidents, indirect damages, or consequential damages. Where liability cannot legally be excluded, total liability shall not exceed the amount paid by You for the Plugin, if any.</p>
+        <h4>13. Indemnification</h4>
+        <p>You agree to indemnify and hold harmless the Developer from any claims, damages, losses, or expenses arising out of Your use of the Plugin, Your violation of these Terms, or Your violation of any law or the rights of a third party.</p>
+        <h4>14. Termination</h4>
+        <p>We may terminate or suspend Your license at any time, including for violation of these Terms. Upon termination, Your right to use the Plugin immediately ceases. Sections 5, 11, 12, 13, 15, and 16 survive termination.</p>
+        <h4>15. Dispute Resolution</h4>
+        <p>Any disputes arising under these Terms shall first be resolved through good-faith negotiation. If not resolved, disputes shall be resolved in the courts of the Developer's jurisdiction.</p>
+        <h4>16. Governing Law</h4>
+        <p>These Terms shall be governed by and interpreted under the laws applicable to the Developer's jurisdiction, without regard to conflict-of-law principles.</p>
+        <h4>17. General Provisions</h4>
+        <p>If any provision of these Terms is determined unenforceable, the remaining provisions shall remain in full force and effect. These Terms constitute the entire agreement between You and the Developer regarding the Plugin.</p>
+        <h4>18. Contact Information</h4>
+        <p>For questions regarding these Terms:<br>Discord: <a href="https://discord.com/channels/1500056296861204531/1535241074862198854">Noonblade SMP Discord</a><br>GitHub: <a href="https://github.com/Swafts/noonblade">github.com/Swafts/noonblade</a></p>
+        <p>Noonblade SMP is not affiliated with Mojang AB or Microsoft Corporation.</p>
       </div>
     </div>
   </div>
-  <div class="footer-base">Noonblade SMP &middot; Premium Minecraft SMP management plugin &middot; Not affiliated with Mojang or Microsoft</div>
+  <div class="footer-base">Noonblade SMP · Premium Minecraft SMP management plugin · Not affiliated with Mojang or Microsoft</div>
 </footer>
 
 <div class="toast" id="toast">Copied!</div>
