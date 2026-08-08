@@ -242,6 +242,8 @@ footer a{color:var(--purple);}
       <div class="row"><div class="code-cell"><code>/noonblade trust &lt;player&gt; &lt;1-5&gt;</code></div><div class="desc">Set a player's trust level (ops)</div></div>
       <div class="row"><div class="code-cell"><code>/noonblade untrust &lt;player&gt;</code></div><div class="desc">Remove a player's trust (ops)</div></div>
       <div class="row"><div class="code-cell"><code>/noonblade skin set &lt;nick&gt; &lt;player&gt;</code></div><div class="desc">Set a player's skin + persistent tab nickname (ops)</div></div>
+      <div class="row"><div class="code-cell"><code>/noonblade immortal &lt;player&gt;</code></div><div class="desc">Grant or remove a player's immortality (ops)</div></div>
+      <div class="row"><div class="code-cell"><code>/noonblade deathlist [ban|unban &lt;player&gt;]</code></div><div class="desc">List, force to spectator, or bring back death-listed players (ops)</div></div>
       <div class="row"><div class="code-cell"><code>/noonblade reload</code></div><div class="desc">Reload all configs, kits, templates, warnings, checkpoints (ops)</div></div>
       <div class="row"><div class="code-cell"><code>/warn &lt;player&gt; &lt;reason&gt;</code></div><div class="desc">Warn a player (ops + trusted)</div></div>
     </div>
@@ -292,7 +294,8 @@ footer a{color:var(--purple);}
       <p>Download the latest release, or grab a specific older build.</p>
     </div>
     <div class="table reveal">
-      <div class="row"><div class="code-cell"><code>v1.0.3</code> <span class="latest-tag">LATEST</span></div><div class="desc">Invsee fix · /noonblade help · /noonblade skin set · 60-min key expiry</div><div class="ver-dl"><a href="#" class="btn btn-purple btn-sm" data-version-download="versions/Noonblade-1.0.3.jar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</a></div></div>
+      <div class="row"><div class="code-cell"><code>v1.0.6</code> <span class="latest-tag">LATEST</span></div><div class="desc">Death List &amp; spectator mode · /noonblade immortal · respawn-on-death toggle · half-heart cap</div><div class="ver-dl"><a href="#" class="btn btn-purple btn-sm" data-version-download="versions/Noonblade-1.0.6.jar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</a></div></div>
+      <div class="row"><div class="code-cell"><code>v1.0.3</code></div><div class="desc">Invsee fix · /noonblade help · /noonblade skin set · 60-min key expiry.</div><div class="ver-dl"><a href="#" class="btn btn-purple btn-sm" data-version-download="versions/Noonblade-1.0.3.jar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</a></div></div>
       <div class="row"><div class="code-cell"><code>v1.0.0</code></div><div class="desc">Original release — core menu, kits, parkour, player management.</div><div class="ver-dl"><a href="#" class="btn btn-purple btn-sm" data-version-download="versions/Noonblade-1.0.0.jar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</a></div></div>
     </div>
   </div>
@@ -308,7 +311,7 @@ footer a{color:var(--purple);}
       <div class="modal-logo"><img src="froke-smp.png" alt="Noonblade"></div>
       <div class="modal-title-block">
         <div class="modal-name">Noonblade SMP</div>
-        <div class="modal-tag">Official Server Plugin &middot; v1.0.3</div>
+        <div class="modal-tag">Official Server Plugin &middot; v1.0.6</div>
       </div>
       <button class="modal-close" id="keyModalClose" aria-label="Close">&times;</button>
     </div>
@@ -370,14 +373,14 @@ const errEl=document.getElementById('keyError');
 const errText=errEl.querySelector('span');
 const submit=document.getElementById('keySubmit');
 let downloading=false;
-let pendingFile='versions/Noonblade-1.0.3.jar';
-let pendingName='Noonblade-1.0.3.jar';
+let pendingFile='versions/Noonblade-1.0.6.jar';
+let pendingName='Noonblade-1.0.6.jar';
 
 function openModal(){errEl.classList.remove('show');input.value='';modal.classList.add('show');input.focus();}
 function closeModal(){modal.classList.remove('show');}
 
 document.querySelectorAll('[data-download]').forEach(a=>{
-  a.addEventListener('click',e=>{e.preventDefault();pendingFile='versions/Noonblade-1.0.3.jar';pendingName='Noonblade-1.0.3.jar';openModal();});
+  a.addEventListener('click',e=>{e.preventDefault();pendingFile='versions/Noonblade-1.0.6.jar';pendingName='Noonblade-1.0.6.jar';openModal();});
 });
 document.querySelectorAll('[data-version-download]').forEach(a=>{
   a.addEventListener('click',e=>{e.preventDefault();pendingFile=a.getAttribute('data-version-download');pendingName=pendingFile.split('/').pop();openModal();});
