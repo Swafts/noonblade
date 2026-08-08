@@ -154,6 +154,18 @@ section{padding:90px 20px;position:relative;}
 .modal-error svg{width:14px;height:14px;flex-shrink:0;}
 footer{text-align:center;padding:44px 20px;color:#6b6b78;font-size:.9rem;border-top:1px solid var(--border);}
 footer a{color:var(--purple);}
+footer .legal{max-width:760px;margin:0 auto 36px;text-align:left;}
+footer .legal-item{border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;background:rgba(255,255,255,.02);}
+footer .legal-toggle{width:100%;background:none;border:none;padding:14px 18px;font:inherit;font-weight:600;color:var(--text);cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;}
+footer .legal-toggle:hover{background:rgba(255,255,255,.04);}
+footer .legal-toggle::after{content:"+";font-size:1.2rem;color:var(--purple);transition:transform .2s;}
+footer .legal-item.open .legal-toggle::after{transform:rotate(45deg);}
+footer .legal-body{display:none;padding:0 18px 16px;font-size:.88rem;line-height:1.6;color:#9a9aa8;}
+footer .legal-item.open .legal-body{display:block;}
+footer .legal-body p{margin:0 0 10px;}
+footer .legal-body ul{margin:0;padding-left:20px;}
+footer .legal-body li{margin-bottom:6px;}
+footer .footer-base{border-top:1px solid var(--border);padding-top:20px;font-size:.85rem;}
 </style>
 </head>
 <body>
@@ -301,7 +313,40 @@ footer a{color:var(--purple);}
   </div>
 </section>
 
-<footer>Noonblade SMP · Premium Minecraft SMP management plugin · Not affiliated with Mojang or Microsoft</footer>
+<footer>
+  <div class="legal">
+    <div class="legal-item">
+      <button class="legal-toggle" data-legal="copyright">Copyright</button>
+      <div class="legal-body" id="legal-copyright">
+        <p>&copy; <span id="year"></span> Noonblade SMP. All rights reserved.</p>
+        <p>Noonblade SMP is the exclusive property of its creator. Any public use, redistribution, re-upload, resale, or publication of this plugin — or any part of its code, design, or assets — is strictly prohibited.</p>
+        <p><strong>Legal notice:</strong> If you use Noonblade for any public purpose without explicit written permission, you will be sued. Unauthorized use is subject to full legal action including claims for damages.</p>
+      </div>
+    </div>
+    <div class="legal-item">
+      <button class="legal-toggle" data-legal="privacy">Privacy Policy</button>
+      <div class="legal-body" id="legal-privacy">
+        <p>We respect your privacy. Noonblade does not collect, sell, or share any personal information beyond what is strictly required for the plugin to function.</p>
+        <p><strong>What we collect:</strong> To verify your license and secure your server, the plugin sends your license key, a unique server ID, and your server's player data to our license server for validation. This is used solely to check that your key is valid and bound to your server.</p>
+        <p><strong>What we do NOT collect:</strong> We do not collect passwords, chat messages, personal contact details, or any data unrelated to plugin functionality. We do not sell or share your data with third parties.</p>
+      </div>
+    </div>
+    <div class="legal-item">
+      <button class="legal-toggle" data-legal="terms">Terms &amp; Conditions</button>
+      <div class="legal-body" id="legal-terms">
+        <p>By downloading or using Noonblade you agree to the following terms:</p>
+        <ul>
+          <li>You must hold a valid, activated license key to use the plugin.</li>
+          <li>Each key is bound to exactly one server and may not be shared.</li>
+          <li>You may not re-upload, redistribute, modify, or claim ownership of the plugin.</li>
+          <li>Use is provided "as is", without warranty of any kind.</li>
+          <li>Violation of these terms may result in key revocation and legal action.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-base">Noonblade SMP &middot; Premium Minecraft SMP management plugin &middot; Not affiliated with Mojang or Microsoft</div>
+</footer>
 
 <div class="toast" id="toast">Copied!</div>
 
@@ -436,6 +481,14 @@ function downloadFile(){
   toast._t=setTimeout(()=>toast.classList.remove('show'),1600);
   setTimeout(()=>{downloading=false;},1500);
 }
+
+document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('.legal-toggle').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.legal-item');
+    item.classList.toggle('open');
+  });
+});
 </script>
 </body>
 </html>
