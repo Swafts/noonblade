@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noonblade Plugin</title>
+<title>Noonblade SMP</title>
 <link rel="icon" type="image/png" href="froke-smp.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,8 +29,6 @@ nav .links a{transition:color .2s;}
 nav .links a:hover{color:var(--purple);}
 nav .nav-cta{padding:9px 18px;border-radius:8px;background:linear-gradient(135deg,#9333ea,#a855f7);color:#fff;font-weight:600;font-size:.88rem;box-shadow:0 4px 18px rgba(147,51,234,.4);}
 .nav-right{display:flex;align-items:center;gap:12px;}
-.nav-versions{padding:9px 16px;border-radius:8px;border:1px solid var(--border);color:var(--gray);font-weight:600;font-size:.88rem;transition:color .2s,border-color .2s;}
-.nav-versions:hover{color:var(--purple);border-color:var(--purple);}
 @media(max-width:700px){nav .links{display:none;}.nav-right{gap:8px;}}
 
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 20px 60px;overflow:hidden;}
@@ -39,9 +37,6 @@ nav .nav-cta{padding:9px 18px;border-radius:8px;background:linear-gradient(135de
 #snow span{position:absolute;top:-15px;border-radius:50%;opacity:.95;animation:fall linear infinite;}
 @keyframes fall{to{transform:translateY(110vh);opacity:.2;}}
 .hero>*{position:relative;z-index:1;}
-.hero-logo{width:96px;height:96px;border-radius:18px;background:linear-gradient(135deg,#3b82f6,#a855f7);display:flex;align-items:center;justify-content:center;margin-bottom:30px;box-shadow:0 0 50px rgba(99,102,241,.55);animation:logoPulse 3s ease-in-out infinite;}
-@keyframes logoPulse{0%,100%{box-shadow:0 0 40px rgba(99,102,241,.5);}50%{box-shadow:0 0 70px rgba(168,85,247,.7);}}
-.hero-logo svg{width:52px;height:52px;}
 .hero-img{width:110px;height:110px;object-fit:cover;border-radius:18px;margin:0 auto 28px;display:block;box-shadow:0 0 40px rgba(99,102,241,.5);}
 .hero h1{font-family:"Press Start 2P",monospace;font-size:clamp(2rem,9vw,5rem);letter-spacing:3px;line-height:1.3;background:linear-gradient(90deg,#60a5fa,#c084fc,#f0abfc,#60a5fa);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s linear infinite;}
 @keyframes shimmer{to{background-position:300% 0;}}
@@ -59,7 +54,7 @@ nav .nav-cta{padding:9px 18px;border-radius:8px;background:linear-gradient(135de
 .btn:hover::after{opacity:1;}
 .hero-notes{margin-top:32px;color:var(--gray);font-size:.95rem;display:flex;gap:24px;flex-wrap:wrap;justify-content:center;}
 .hero-notes span{display:inline-flex;align-items:center;gap:8px;}
-.hero-notes span::before{content:"â—";color:var(--purple);font-size:.6rem;animation:pulse 2s infinite;}
+.hero-notes span::before{content:"●";color:var(--purple);font-size:.6rem;animation:pulse 2s infinite;}
 @keyframes pulse{50%{opacity:.3;}}
 .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--gray);font-size:.8rem;animation:bob 2s ease-in-out infinite;letter-spacing:2px;}
 @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,8px);}}
@@ -86,9 +81,7 @@ section{padding:90px 20px;position:relative;}
 .card:hover{transform:translateY(-6px);border-color:var(--card-accent,var(--purple));box-shadow:0 12px 40px -12px var(--card-glow,rgba(168,85,247,.5));}
 .card h3{display:flex;align-items:center;gap:12px;font-size:1.15rem;margin-bottom:14px;}
 .card h3 svg{width:22px;height:22px;flex-shrink:0;color:var(--card-accent,var(--purple));}
-.card ul{list-style:none;}
-.card ul li{color:var(--gray);padding:7px 0 7px 22px;position:relative;font-size:.95rem;}
-.card ul li::before{content:"â–¸";position:absolute;left:0;color:var(--card-accent,var(--purple));}
+.card p{color:var(--gray);font-size:.97rem;}
 .c-purple{--card-accent:var(--purple);--card-glow:rgba(168,85,247,.5);}
 .c-green{--card-accent:var(--green);--card-glow:rgba(34,197,94,.5);}
 .c-blue{--card-accent:var(--blue);--card-glow:rgba(59,130,246,.5);}
@@ -96,24 +89,19 @@ section{padding:90px 20px;position:relative;}
 .c-yellow{--card-accent:var(--yellow);--card-glow:rgba(234,179,8,.5);}
 .c-pink{--card-accent:var(--pink);--card-glow:rgba(236,72,153,.5);}
 
-.table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px -30px rgba(0,0,0,.8);}
-.table .row{display:flex;align-items:center;gap:20px;padding:20px 26px;border-bottom:1px solid var(--border);transition:background .2s;}
-.table .row:last-child{border-bottom:none;}
-.table .row:hover{background:rgba(168,85,247,.06);}
-.table .code-cell{width:42%;flex-shrink:0;}
-.table code{color:#c084fc;background:rgba(168,85,247,.12);padding:6px 12px;border-radius:7px;font-family:"Consolas",monospace;font-size:.9rem;cursor:pointer;transition:background .2s;white-space:nowrap;}
-.table code:hover{background:rgba(168,85,247,.25);}
-.table .desc{color:var(--gray);}
-.table .desc{flex:1;min-width:0;}
-.table .ver-dl{flex-shrink:0;}
-.latest-tag{display:inline-block;background:#22c55e;color:#fff;font-size:.66rem;font-weight:800;letter-spacing:.5px;padding:3px 8px;border-radius:999px;margin-left:8px;vertical-align:middle;}
-.btn-sm{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;font-size:.8rem;border-radius:8px;}
-.btn-sm svg{width:14px;height:14px;}
+.story{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;position:relative;overflow:hidden;}
+.story::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--blue));}
+.story h3{font-size:1.3rem;margin-bottom:18px;color:var(--text);}
+.story p{color:var(--gray);margin-bottom:16px;font-size:1.02rem;}
+.story p:last-child{margin-bottom:0;}
+.story em{color:#c084fc;font-style:normal;}
 
-.license-card{border-left:4px solid var(--purple);}
-.license-card h3{display:flex;align-items:center;gap:12px;}
-.license-card h3 svg{width:22px;height:22px;color:var(--purple);}
-.license-card p{color:var(--gray);font-size:.97rem;}
+.quote{background:rgba(168,85,247,.08);border-left:3px solid var(--purple);border-radius:8px;padding:20px 24px;margin:24px 0;font-style:italic;color:#d8b4fe;}
+
+.survivor{display:flex;align-items:center;gap:18px;}
+.survivor .avatar{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#3b82f6,#a855f7);display:flex;align-items:center;justify-content:center;font-family:"Press Start 2P",monospace;font-size:.8rem;color:#fff;flex-shrink:0;}
+.survivor .name{font-weight:700;}
+.survivor .role{color:var(--gray);font-size:.88rem;}
 
 .cta{background:linear-gradient(135deg,rgba(88,28,135,.7),rgba(76,29,149,.7));border:1px solid rgba(168,85,247,.45);border-radius:20px;text-align:center;padding:56px 30px;margin-top:64px;position:relative;overflow:hidden;}
 .cta>*{position:relative;}
@@ -121,59 +109,12 @@ section{padding:90px 20px;position:relative;}
 .cta .thumb img{width:100%;height:100%;object-fit:cover;}
 .cta h2{font-family:"Press Start 2P",monospace;font-size:1.4rem;line-height:1.6;margin-bottom:14px;}
 .cta p{color:var(--gray);max-width:560px;margin:0 auto 32px;}
-
+.ip-box{display:inline-flex;align-items:center;gap:12px;background:#0d0d14;border:1px solid #2a2a35;border-radius:10px;padding:14px 24px;font-family:"Consolas",monospace;font-size:1.05rem;color:#c084fc;cursor:pointer;transition:border-color .2s;margin-bottom:28px;}
+.ip-box:hover{border-color:var(--purple);}
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--purple);color:var(--text);padding:12px 22px;border-radius:10px;z-index:200;opacity:0;transition:all .35s ease;box-shadow:0 10px 40px rgba(0,0,0,.6);}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-.modal-overlay{position:fixed;inset:0;background:rgba(5,5,10,.82);z-index:300;display:none;align-items:center;justify-content:center;padding:20px;}
-.modal-overlay.show{display:flex;}
-.modal{position:relative;width:100%;max-width:560px;background:#17171f;border:1px solid #2a2a35;border-radius:16px;box-shadow:0 40px 100px -20px rgba(0,0,0,.95);animation:modalIn .22s ease;overflow:hidden;}
-@keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.98);}to{opacity:1;transform:translateY(0) scale(1);}}
-.modal-head{display:flex;align-items:center;gap:14px;padding:20px 24px;border-bottom:1px solid var(--border);}
-.modal-logo{width:46px;height:46px;border-radius:10px;overflow:hidden;flex-shrink:0;border:1px solid var(--border);}
-.modal-logo img{width:100%;height:100%;object-fit:cover;}
-.modal-title-block{flex:1;min-width:0;}
-.modal-name{font-size:1.02rem;font-weight:700;}
-.modal-tag{color:#8b8b96;font-size:.78rem;margin-top:2px;}
-.modal-close{background:none;border:none;color:#8b8b96;font-size:1.4rem;line-height:1;cursor:pointer;transition:color .2s;flex-shrink:0;}
-.modal-close:hover{color:#fff;}
-.modal-body{padding:20px 24px;}
-.modal-desc{color:var(--gray);font-size:.9rem;line-height:1.55;margin-bottom:16px;}
-.modal-actions{display:flex;flex-direction:column;gap:10px;}
-.modal-key-row{display:flex;gap:10px;}
-.modal-input{flex:1;background:#0d0d14;border:1px solid #2a2a35;border-radius:9px;color:var(--text);font-size:.95rem;font-family:"Consolas",monospace;letter-spacing:1px;text-align:center;padding:12px;outline:none;transition:border-color .2s,box-shadow .2s;min-width:0;}
-.modal-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(168,85,247,.15);}
-.modal-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:9px;font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:filter .2s,background .2s;}
-.modal-btn svg{width:16px;height:16px;}
-.modal-btn-primary{background:linear-gradient(135deg,#7c3aed,#8b5cf6);color:#fff;}
-.modal-btn-primary:hover{filter:brightness(1.1);}
-.modal-btn-ghost{background:#1c1c26;border:1px solid #2f2f3b;color:var(--text);}
-.modal-btn-ghost:hover{background:#23232f;}
-.modal-key-hint{color:var(--gray);font-size:.82rem;text-align:center;margin-top:6px;}
-.modal-error{display:none;align-items:center;gap:7px;background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.3);color:var(--red);font-size:.84rem;font-weight:500;padding:9px 12px;border-radius:8px;margin-bottom:10px;}
-.modal-error.show{display:flex;}
-.modal-error svg{width:14px;height:14px;flex-shrink:0;}
 footer{text-align:center;padding:44px 20px;color:#6b6b78;font-size:.9rem;border-top:1px solid var(--border);}
 footer a{color:var(--purple);}
-footer .legal{max-width:760px;margin:0 auto 36px;text-align:left;}
-footer .legal-item{border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;background:rgba(255,255,255,.02);}
-footer .legal-item summary{width:100%;background:none;border:none;padding:14px 18px;font:inherit;font-weight:600;color:var(--text);cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;list-style:none;user-select:none;}
-footer .legal-item summary::-webkit-details-marker{display:none;}
-footer .legal-item summary::after{content:"+";font-size:1.2rem;color:var(--purple);transition:transform .2s;font-weight:600;}
-footer .legal-item[open] summary::after{transform:rotate(45deg);}
-footer .legal-item summary:hover{background:rgba(255,255,255,.04);}
-footer .legal-body{padding:0 18px 16px;font-size:.88rem;line-height:1.6;color:#9a9aa8;max-height:60vh;overflow-y:auto;}
-footer .legal-body h3{margin:0 0 12px;font-size:1.05rem;color:var(--text);}
-footer .legal-body h4{margin:18px 0 8px;font-size:.92rem;color:var(--text);}
-footer .legal-meta{margin:0 0 14px;color:#6b6b78;font-size:.82rem;}
-footer .legal-body p{margin:0 0 10px;}
-footer .legal-body ul{margin:0 0 10px;padding-left:20px;}
-footer .legal-body ol{margin:0 0 10px;padding-left:22px;}
-footer .legal-body li{margin-bottom:6px;color:#8a8a98;}
-footer .legal-body code{background:rgba(168,85,247,.12);padding:1px 6px;border-radius:5px;font-size:.85rem;color:var(--purple);}
-footer .legal-body a{color:var(--purple);}
-footer .legal-body a:hover{text-decoration:underline;}
-footer .legal-body p strong{color:#b9b9c6;}
-footer .footer-base{border-top:1px solid var(--border);padding-top:20px;font-size:.85rem;}
 </style>
 </head>
 <body>
@@ -181,391 +122,128 @@ footer .footer-base{border-top:1px solid var(--border);padding-top:20px;font-siz
 <nav id="nav">
   <a href="#" class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V4.5l9 4 9-4V21"></path><path d="M3 21h18"></path></svg> Noonblade SMP</a>
   <div class="links">
-    <a href="#features">Features</a>
-    <a href="#commands">Commands</a>
-    <a href="#license">License</a>
+    <a href="#story">The Story</a>
+    <a href="#survivors">Survivors</a>
+    <a href="#join">Join</a>
   </div>
   <div class="nav-right">
-    <a href="#versions" class="nav-versions">Versions</a>
-    <a href="#" class="nav-cta" data-download>Download</a>
+    <a href="https://discord.com/channels/1500056296861204531/1535241074862198854" target="_blank" class="nav-cta">Join the Discord</a>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="snow" id="snow"></div>
-  <img src="froke-smp.png" alt="Froke SMP" class="hero-img">
-  <h1>NOONBLADE</h1>
-  <div class="tag">Premium SMP Plugin</div>
-  <p class="sub">A premium all-in-one SMP management plugin for Minecraft servers â€” combining parkour, player management, kit systems, custom weapons, and full server control into one easy menu.</p>
-      <div class="hero-buttons">
-        <a href="#" class="btn btn-purple btn-big" data-download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Plugin</a>
-      </div>
-  <div class="hero-notes">
-    <span>Paper 1.20.4 â†’ 26.2</span>
-    <span>License required</span>
-    <span>Drop in &amp; restart</span>
+  <div id="snow"></div>
+  <img src="froke-smp.png" alt="Noonblade SMP" class="hero-img">
+  <h1>NOONBLADE SMP</h1>
+  <div class="tag">Where legends were forged</div>
+  <p class="sub">One world. One night that changed everything. A handful of survivors, a fallen civilization, and the story of how they kept the light alive.</p>
+  <div class="hero-buttons">
+    <a href="https://discord.com/channels/1500056296861204531/1535241074862198854" target="_blank" class="btn btn-purple btn-big"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.32 4.37a19.8 19.8 0 0 0-4.93-1.51 13.77 13.77 0 0 0-.64 1.28 18.27 18.27 0 0 0-5.5 0 12.64 12.64 0 0 0-.64-1.28 19.74 19.74 0 0 0-4.93 1.51C.53 9.05-.32 13.58.1 18.06a19.9 19.9 0 0 0 6.02 3.03 14.46 14.46 0 0 0 1.24-2 12.82 12.82 0 0 1-1.95-.94c.16-.12.32-.24.48-.37a14.18 14.18 0 0 0 12.12 0c.16.13.32.25.48.37a12.82 12.82 0 0 1-1.95.94 14.4 14.4 0 0 0 1.24 2 19.87 19.87 0 0 0 6.02-3.03c.5-5.19-.85-9.69-3.6-13.69zM8.02 15.33c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.96-2.42 2.16-2.42s2.17 1.09 2.16 2.42c0 1.34-.96 2.42-2.16 2.42zm7.96 0c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.95-2.42 2.16-2.42s2.17 1.09 2.16 2.42c0 1.34-.95 2.42-2.16 2.42z"/></svg> Join us</a>
+    <a href="https://www.youtube.com/@Swafts" target="_blank" class="btn btn-blue btn-big"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg> Watch on YouTube</a>
   </div>
-  <div class="scroll-hint">â–¼ SCROLL</div>
+  <div class="hero-notes">
+    <span>Java Edition</span>
+    <span>Story-driven SMP</span>
+    <span>Fresh lore every season</span>
+  </div>
+  <div class="scroll-hint">▼ SCROLL TO READ THE LEGEND</div>
 </header>
 
 <div class="banner">
-  <strong>âœ“ Built against the Paper API</strong> Â· Tested on Paper 1.20.4 + 26.2 Â· <strong>Drop in. restart. done.</strong>
+  <strong>THE LEGEND OF THE NOONBLADE</strong> · How the last survivors of a shattered world rebuild what was lost
 </div>
 
-<section id="features">
+<section id="story">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
-      <h2>EVERYTHING YOU NEED</h2>
-      <p>Six powerful modules, one plugin. No fluff, no fragmentation.</p>
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+      <h2>THE STORY OF THE SURVIVORS</h2>
+      <p>The day the world went dark, and the ones who refused to die.</p>
+    </div>
+
+    <div class="story reveal">
+      <h3>Chapter One — The Night It All Fell</h3>
+      <p>No one remembers exactly when it started. One night, without warning, <em>the mobs stopped following the rules</em>. Spiders crawled out of the caves in endless waves. Creepers came in silence, their hiss the only warning. The great settlements — built over hundreds of hours — fell one by one, drowned in a tide of monsters no sword could stop.</p>
+      <p>The servers went quiet. Bases were abandoned. Chat turned to static. For a while, it looked like the world was just... gone.</p>
+      <div class="quote">"I remember standing on the roof of our base, watching the last torch go out. I told myself: if I die, I die. But if I live, I'm coming back for everyone."</div>
+    </div>
+
+    <div class="story reveal" style="margin-top:28px;">
+      <h3>Chapter Two — Swafts, The One Who Wouldn't Die</h3>
+      <p>While everyone else logged off, <em>Swafts</em> stayed. Alone. Underground. Three hearts left, one iron sword, and a half-broken shield. For nine nights straight he dug — not to hide, but to build something the mobs couldn't reach and no one else had dared to make: a fortress carved into the heart of a mountain, sealed with a single obsidian door.</p>
+      <p>He didn't just survive. He started bringing people in. One by one, the few who had made it — scattered, half-starved players with nothing but their will to live — found their way to his beacon. Swafts gave them walls, food, and weapons. And slowly, the whispers began.</p>
+      <p><em>The Noonblade was real.</em> A blade that could cut through the darkness itself. Legend said it had been lost in the collapse. Swafts never said where he found it. He only ever said: <em>"We're not done yet."</em></p>
+    </div>
+
+    <div class="story reveal" style="margin-top:28px;">
+      <h3>Chapter Three — The Rebuild</h3>
+      <p>The survivors banded together and pooled everything they had left. They built a new spawn — not a monument to a fallen world, but a promise of the next one. Farmlands that never sleep. A marketplace for the traders who dare the roads. Walls lit brighter than the old world ever was.</p>
+      <p>The mobs still come. They always will. But now, when a creeper hisses in the dark, it doesn't end in silence anymore — it ends with a team of survivors answering back.</p>
+      <p>This is the Noonblade SMP. The world that was supposed to end. And the people who said no.</p>
+    </div>
+  </div>
+</section>
+
+<section id="survivors" style="background:#101018;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h2>THE SURVIVORS</h2>
+      <p>Those who walked through the dark and came out the other side.</p>
     </div>
     <div class="grid grid-3">
       <div class="card c-purple reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Player Management</h3>
-        <ul><li>Browse every online player and click to manage</li><li>Invsee â€” view and edit any player's inventory</li><li>Kick, Ban, Warn with typed durations and reasons</li><li>Trust levels 1â€“5, each unlocking more permissions</li></ul>
-      </div>
-      <div class="card c-green reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Parkour &amp; Checkpoints</h3>
-        <ul><li>Placeable checkpoint plates (4 types)</li><li>Falls below limit? Teleport back to latest checkpoint</li><li>Auto-granted "Return to Spawn" item</li><li>Give-up mechanic built in</li></ul>
+        <div class="survivor">
+          <div class="avatar">SW</div>
+          <div>
+            <div class="name">Swafts</div>
+            <div class="role">Founder · The One Who Wouldn't Die · Keeper of the Noonblade</div>
+          </div>
+        </div>
+        <p style="margin-top:16px;">Led the survival after the fall. Found the lost blade, opened his doors, and refused to let the world end.</p>
       </div>
       <div class="card c-blue reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg> Kits &amp; Templates</h3>
-        <ul><li>Full kit editor: armor, offhand, 27 slots + hotbar</li><li>Apply kit to all eligible players in one click</li><li>Import from inventory, clear editor, clear all kits</li><li>16 shulker color templates â€” nameable, loadable, deletable</li></ul>
+        <div class="survivor">
+          <div class="avatar">??</div>
+          <div>
+            <div class="name">The First Seven</div>
+            <div class="role">The original settlement survivors</div>
+          </div>
+        </div>
+        <p style="margin-top:16px;">Seven names whispered in legend — the ones who made it to Swafts' mountain before anyone else. Their real identities remain a mystery.</p>
       </div>
-      <div class="card c-red reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Custom Weapons</h3>
-        <ul><li>Kinetic Arrow Shooter â€” fires a 20-arrow volley</li><li>Strips armor on hit</li><li>One-use bow, carefully balanced for SMP play</li></ul>
-      </div>
-      <div class="card c-yellow reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Server Controls</h3>
-        <ul><li>PVP toggle â€” ops and trusted always bypass</li><li>Wither Sound â€” ambient growl with adjustable range</li><li>Death Messages â€” fake "died/left" broadcasts</li><li>Difficulty / Time / Weather with auto-revert</li></ul>
-      </div>
-      <div class="card c-pink reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Automatic Systems</h3>
-        <ul><li>Join handling â€” untrusted players cleared &amp; teleported to spawn</li><li>Spawn protection â€” block breaking near spawn</li><li>3 warnings = 30-second spectator penalty</li><li>Dynamic MOTD with live player count gradient</li></ul>
+      <div class="card c-green reveal">
+        <div class="survivor">
+          <div class="avatar">+</div>
+          <div>
+            <div class="name">The New Generation</div>
+            <div class="role">Players rebuilding the world today</div>
+          </div>
+        </div>
+        <p style="margin-top:16px;">Every new player added to this SMP writes their own chapter. The fortress walls are open — the story continues with you.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="commands" style="background:#101018;">
+<section id="join">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-      <h2>COMMANDS</h2>
-      <p>Everything ops need, nothing they don't.</p>
-    </div>
-    <div class="table reveal">
-      <div class="row"><div class="code-cell"><code>/noonblade</code></div><div class="desc">Opens the main control menu</div></div>
-      <div class="row"><div class="code-cell"><code>/noonblade help</code></div><div class="desc">Lists every Noonblade command in chat</div></div>
-      <div class="row"><div class="code-cell"><code>/noonblade activate &lt;key&gt;</code></div><div class="desc">Activate your license key</div></div>
-      <div class="row"><div class="code-cell"><code>/noonblade trust &lt;player&gt; &lt;1-5&gt;</code></div><div class="desc">Set a player's trust level (ops)</div></div>
-      <div class="row"><div class="code-cell"><code>/noonblade untrust &lt;player&gt;</code></div><div class="desc">Remove a player's trust (ops)</div></div>
-      <div class="row"><div class="code-cell"><code>/noonblade skin set &lt;nick&gt; &lt;player&gt;</code></div><div class="desc">Set a player's skin + persistent tab nickname (ops)</div></div>
-      <div class="row"><div class="code-cell"><code>/noonblade immortal &lt;player&gt;</code></div><div class="desc">Grant or remove a player's immortality (ops)</div></div>
-      <div class="row"><div class="code-cell"><code>/noonblade deathlist [ban|unban &lt;player&gt;]</code></div><div class="desc">List, force to spectator, or bring back death-listed players (ops)</div></div>
-      <div class="row"><div class="code-cell"><code>/noonblade reload</code></div><div class="desc">Reload all configs, kits, templates, warnings, checkpoints (ops)</div></div>
-      <div class="row"><div class="code-cell"><code>/warn &lt;player&gt; &lt;reason&gt;</code></div><div class="desc">Warn a player (ops + trusted)</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="license">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-      <h2>LICENSE SYSTEM</h2>
-      <p>Keys are managed through Discord â€” fast, secure, and instant.</p>
-    </div>
-    <div class="grid grid-2">
-      <div class="card license-card reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Get a key</h3>
-        <p>Apply in the Discord server â€” keys are generated automatically via the Noonblade bot.</p>
-      </div>
-      <div class="card license-card reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> 1 key = 1 server</h3>
-        <p>The first server to activate a key owns it permanently. Sharing it with another server returns "invalid".</p>
-      </div>
-      <div class="card license-card reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Instant revocation</h3>
-        <p>Rotate or ban a key from Discord and the plugin disables within seconds.</p>
-      </div>
-      <div class="card license-card reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Auto checks every 5s</h3>
-        <p>The plugin re-validates in the background on every server. Bans take effect almost instantly.</p>
-      </div>
-    </div>
-    <div class="cta reveal" id="download">
-      <div class="thumb"><img src="froke-smp.png" alt="Froke SMP"></div>
-      <h2>READY TO RUN NOONBLADE?</h2>
-      <p>Download the plugin, drop the .jar into your plugins/ folder, restart, and activate your license key.</p>
+    <div class="cta reveal">
+      <div class="thumb"><img src="froke-smp.png" alt="Noonblade SMP"></div>
+      <h2>THE WORLD IS WAITING.</h2>
+      <p>Join the survivors. Carry your own torch into the Noonblade SMP and write your name into the legend.</p>
+      <div class="ip-box" id="ipBox">91.197.6.19:23853</div>
       <div class="hero-buttons">
-        <a href="#" class="btn btn-purple btn-big" data-download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Plugin</a>
+        <a href="https://discord.com/channels/1500056296861204531/1535241074862198854" target="_blank" class="btn btn-purple btn-big"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.32 4.37a19.8 19.8 0 0 0-4.93-1.51 13.77 13.77 0 0 0-.64 1.28 18.27 18.27 0 0 0-5.5 0 12.64 12.64 0 0 0-.64-1.28 19.74 19.74 0 0 0-4.93 1.51C.53 9.05-.32 13.58.1 18.06a19.9 19.9 0 0 0 6.02 3.03 14.46 14.46 0 0 0 1.24-2 12.82 12.82 0 0 1-1.95-.94c.16-.12.32-.24.48-.37a14.18 14.18 0 0 0 12.12 0c.16.13.32.25.48.37a12.82 12.82 0 0 1-1.95.94 14.4 14.4 0 0 0 1.24 2 19.87 19.87 0 0 0 6.02-3.03c.5-5.19-.85-9.69-3.6-13.69zM8.02 15.33c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.96-2.42 2.16-2.42s2.17 1.09 2.16 2.42c0 1.34-.96 2.42-2.16 2.42zm7.96 0c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.95-2.42 2.16-2.42s2.17 1.09 2.16 2.42c0 1.34-.95 2.42-2.16 2.42z"/></svg> Join the Discord</a>
+        <a href="https://www.youtube.com/@Swafts" target="_blank" class="btn btn-blue btn-big"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg> Watch on YouTube</a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="versions" style="background:#101018;">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <h2>VERSIONS</h2>
-      <p>Download the latest release, or grab a specific older build.</p>
-    </div>
-    <div class="table reveal">
-      <div class="row"><div class="code-cell"><code>v1.3.4</code> <span class="latest-tag">LATEST</span></div><div class="desc">Disable Mob Spawns toggle (zombie head) — blocks zombies, spiders &amp; hostile mobs &middot; immortality &middot; death list</div><div class="ver-dl"><a href="#" class="btn btn-purple btn-sm" data-version-download="versions/Noonblade-1.3.4.jar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</a></div></div>
-      <div class="row"><div class="code-cell"><code>v1.0.6</code></div><div class="desc">Death List &amp; spectator mode Â· /noonblade immortal Â· respawn-on-death toggle Â· half-heart cap</div><div class="ver-dl"><a href="#" class="btn btn-purple btn-sm" data-version-download="versions/Noonblade-1.0.6.jar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</a></div></div>
-      <div class="row"><div class="code-cell"><code>v1.0.3</code></div><div class="desc">Invsee fix Â· /noonblade help Â· /noonblade skin set Â· 60-min key expiry.</div><div class="ver-dl"><a href="#" class="btn btn-purple btn-sm" data-version-download="versions/Noonblade-1.0.3.jar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</a></div></div>
-      <div class="row"><div class="code-cell"><code>v1.0.0</code></div><div class="desc">Original release â€” core menu, kits, parkour, player management.</div><div class="ver-dl"><a href="#" class="btn btn-purple btn-sm" data-version-download="versions/Noonblade-1.0.0.jar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download</a></div></div>
-    </div>
-  </div>
-</section>
+<footer>Noonblade SMP &middot; A story that's still being written &middot; Not affiliated with Mojang or Microsoft</footer>
 
-<footer>
-  <div class="legal">
-    <details class="legal-item">
-      <summary>Copyright &amp; License Notice</summary>
-      <div class="legal-body">
-        <h3>Copyright &amp; License Notice</h3>
-        <p class="legal-meta">Effective Date: August 8, 2026<br>Last Updated: August 8, 2026<br>Version: 1.0</p>
-        <p>Noonblade SMP is a source-available Minecraft plugin distributed under a custom license. The source code is publicly accessible for viewing, study, and private modification.</p>
-        <p><strong>Copyright &copy; 2026 Swafts. All rights reserved.</strong></p>
-        <p>Noonblade SMP ("Noonblade") is developed and maintained by Swafts. This notice applies to:</p>
-        <ul>
-          <li>The Noonblade source code and compiled binaries (Noonblade-*.jar)</li>
-          <li>Configuration templates and bundled resources</li>
-          <li>Documentation, wiki pages, and written materials</li>
-          <li>Official Noonblade websites and assets</li>
-          <li>Developer-created derivative works and modifications</li>
-        </ul>
-        <h4>License Summary</h4>
-        <p><strong>Permitted</strong></p>
-        <ul>
-          <li>Use the compiled plugin on servers you own or operate</li>
-          <li>Configure and operate the plugin</li>
-          <li>View and study the source code</li>
-          <li>Modify the source code for private/internal use</li>
-          <li>Create private forks for personal/internal use</li>
-        </ul>
-        <p><strong>Prohibited</strong></p>
-        <ul>
-          <li>Redistribute the plugin or modified versions</li>
-          <li>Sell or sublicense the plugin</li>
-          <li>Commercially redistribute the plugin</li>
-          <li>Remove attribution or copyright notices</li>
-          <li>Represent unofficial builds as official releases</li>
-        </ul>
-        <h4>Full License Text</h4>
-        <p><strong>Noonblade Source-Available License — Version 1.0</strong><br>Copyright &copy; 2026 Swafts</p>
-        <p><strong>1. Definitions.</strong> "Plugin" or "Noonblade" means the Noonblade SMP software, including source code, compiled binaries, documentation, configuration files, assets, and associated materials. "Developer" or "Licensor" means Swafts. "You" or "Licensee" means any person or legal entity that downloads, installs, accesses, modifies, or uses the Plugin. "Redistribute" means making the Plugin available to any third party in any form, including public repositories, download links, compiled distributions, mirrors, package managers, bundled software, or hosted services.</p>
-        <p><strong>2. License Grant.</strong> Subject to this License, the Developer grants You a limited, non-exclusive, non-transferable, non-sublicensable license to: (a) use and operate the Plugin on Minecraft servers You own or manage; (b) configure and modify the Plugin for private or internal use; (c) view and study the source code for educational and development purposes; (d) create private forks for internal use only.</p>
-        <p><strong>3. Restrictions.</strong> You may NOT: (a) redistribute the Plugin or modified versions; (b) sell, sublicense, lease, or commercially redistribute the Plugin; (c) publish unofficial builds claiming to be official releases; (d) remove or alter copyright, attribution, or license notices; (e) use the Plugin in violation of applicable laws or third-party licenses.</p>
-        <p><strong>4. Commercial Use.</strong> Running the Plugin on public or monetized Minecraft servers is permitted. However, the Plugin itself may NOT be sold, sublicensed, licensed for payment, commercially redistributed, or bundled into paid products or services without prior written permission from the Developer.</p>
-        <p><strong>5. Source Availability.</strong> The Plugin source code is publicly visible for reference, educational use, and private modification. This project is source-available software and is NOT open-source software.</p>
-        <p><strong>6. Third-Party Components.</strong> Third-party libraries, APIs, and dependencies included with or used by the Plugin remain subject to their own licenses and terms. Nothing in this License overrides rights granted under applicable third-party licenses.</p>
-        <p><strong>7. Attribution.</strong> When using the Plugin in any permitted form, the following attribution must be retained: "Noonblade SMP by Swafts — https://github.com/Swafts/noonblade"</p>
-        <p><strong>8. Intellectual Property.</strong> The Plugin and all associated materials remain the intellectual property of the Developer. No ownership rights are transferred under this License. All rights not expressly granted are reserved.</p>
-        <p><strong>9. Termination.</strong> This License automatically terminates if You materially violate its terms. Upon termination, You must cease all unauthorized redistribution and commercial distribution activities involving the Plugin.</p>
-        <p><strong>10. Disclaimer of Warranty.</strong> THE PLUGIN IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
-        <p><strong>11. Limitation of Liability.</strong> TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE DEVELOPER SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING FROM USE OF THE PLUGIN.</p>
-        <p><strong>12. Governing Law.</strong> This License shall be governed by and interpreted under the laws applicable to the Developer's jurisdiction, without regard to conflict-of-law principles.</p>
-        <p><strong>13. Severability.</strong> If any provision of this License is determined unenforceable, the remaining provisions shall remain in full force and effect.</p>
-        <h4>Third-Party Licenses</h4>
-        <ul>
-          <li><strong>Spigot / Paper API</strong> — Author: SpigotMC / PaperMC contributors — License: GPL-3.0 / MIT — Purpose: Minecraft server development APIs</li>
-          <li><strong>Authlib</strong> — Author: Mojang AB / Microsoft — License: Proprietary — Purpose: GameProfile and skin data handling</li>
-        </ul>
-        <h4>Trademark Notice</h4>
-        <p>"Noonblade SMP", "Noonblade", and associated branding are identifiers of the Developer. You may refer to the Plugin in reviews, tutorials, or compatibility notes, and link to official project pages. You may NOT imply official endorsement or affiliation, use the branding for competing distributions, or present unofficial builds as official releases.</p>
-        <h4>Contact</h4>
-        <p>For copyright concerns or infringement notices, contact:<br>Discord: <a href="https://discord.com/channels/1500056296861204531/1535241074862198854">Noonblade SMP Discord</a><br>GitHub: <a href="https://github.com/Swafts/noonblade">github.com/Swafts/noonblade</a></p>
-        <p>Copyright &copy; 2026 Swafts. All rights reserved.<br>Noonblade SMP is not affiliated with Mojang AB or Microsoft Corporation.</p>
-      </div>
-    </details>
-    <details class="legal-item">
-      <summary>Privacy Policy</summary>
-      <div class="legal-body">
-        <h3>Privacy Policy</h3>
-        <p class="legal-meta">Effective Date: August 8, 2026<br>Last Updated: August 8, 2026<br>Version: 1.0</p>
-        <p><strong>Quick Summary:</strong> Noonblade SMP ("Noonblade") is a server-side Minecraft plugin. We do not collect personal player data through the Plugin itself. All core Plugin data remains on infrastructure controlled by the server operator.</p>
-        <h4>Table of Contents</h4>
-        <ol>
-          <li>Definitions</li>
-          <li>Who We Are</li>
-          <li>Scope of This Policy</li>
-          <li>Information We Collect</li>
-          <li>How Information Is Used</li>
-          <li>Legal Basis for Processing (GDPR)</li>
-          <li>Data Storage &amp; Security</li>
-          <li>Data Retention</li>
-          <li>Third-Party Services</li>
-          <li>Cookies &amp; Tracking</li>
-          <li>Your Rights</li>
-          <li>California Privacy Rights (CCPA/CPRA)</li>
-          <li>Children's Privacy (COPPA)</li>
-          <li>International Data Transfers</li>
-          <li>Changes to This Policy</li>
-          <li>Contact Information</li>
-        </ol>
-        <h4>1. Definitions</h4>
-        <p>"Plugin" or "Noonblade" refers to the Noonblade SMP plugin. "Developer", "We", "Us", or "Our" refers to Swafts. "Server Operator" refers to the individual or organization operating a Minecraft server using Noonblade. "Player" refers to an end-user connecting to a Minecraft server. "Personal Data" has the meaning defined under applicable privacy laws including GDPR. "Plugin Data" means configuration files, database entries, backups, and related Plugin-generated data.</p>
-        <h4>2. Who We Are</h4>
-        <p>Noonblade SMP is developed and maintained by Swafts. Official project resources:<br>GitHub: <a href="https://github.com/Swafts/noonblade">https://github.com/Swafts/noonblade</a><br>Discord: <a href="https://discord.com/channels/1500056296861204531/1535241074862198854">Noonblade SMP Discord</a></p>
-        <h4>3. Scope of This Policy</h4>
-        <p>This Privacy Policy applies to the Noonblade plugin software and official websites/documentation. This Privacy Policy does NOT apply to third-party Minecraft servers using Noonblade, third-party plugins or extensions, unofficial forks or redistributions, or Mojang/Microsoft/Minecraft platform services. Server operators remain independently responsible for compliance with applicable privacy laws relating to their own players and infrastructure.</p>
-        <h4>4. Information We Collect</h4>
-        <p><strong>4.1 Plugin Data Stored Locally.</strong> Noonblade primarily stores data locally on infrastructure controlled by the server operator. Examples include:</p>
-        <ul>
-          <li>Player names and UUIDs — death list, immortality, player management</li>
-          <li>Configuration and toggle settings — respawn-on-death, PVP, record mode</li>
-          <li>Kit definitions and parkour checkpoint data — session and world state</li>
-          <li>Session timestamps — runtime/session tracking</li>
-        </ul>
-        <p>Noonblade does NOT intentionally collect or process: player chat messages, player IP addresses, email addresses, payment information, real-world identity information, or advertising identifiers.</p>
-        <p><strong>4.2 License Verification.</strong> To verify your license, Noonblade sends your license key, a unique server ID, and your server's player names to the Noonblade license service for validation. This is used solely to check that your key is valid and bound to your server.</p>
-        <p><strong>4.3 Website Access Logs.</strong> Official Noonblade websites may temporarily log IP addresses, browser User-Agent strings, request timestamps, requested pages, and HTTP status codes. Logs are used exclusively for security, abuse prevention, availability monitoring, and basic operational diagnostics. Logs are not used for advertising profiling or behavioral tracking.</p>
-        <h4>5. How Information Is Used</h4>
-        <ul>
-          <li><strong>Core Plugin functionality</strong> — Death List, immortality, kits, parkour, player management</li>
-          <li><strong>License activation</strong> — key validation and server binding</li>
-          <li><strong>Security and abuse prevention</strong> — website monitoring</li>
-          <li><strong>Compatibility support</strong> — API and version handling</li>
-        </ul>
-        <p>We do NOT sell personal information or use personal data for advertising purposes.</p>
-        <h4>6. Legal Basis for Processing (GDPR)</h4>
-        <p>For users in the EEA, UK, or Switzerland: core Plugin functionality is processed under legitimate interests; website security logging under legitimate interests; license verification under legitimate interests and/or contractual necessity.</p>
-        <h4>7. Data Storage &amp; Security</h4>
-        <p><strong>7.1 Local Storage.</strong> Plugin data is generally stored locally on the server operator's infrastructure, for example in the <code>plugins/Noonblade/</code> directory, as YAML configuration files. The Developer does not have direct access to server operator databases or local Plugin files.</p>
-        <p><strong>7.2 Security Recommendations.</strong> Server operators are responsible for securing their infrastructure: restrict file permissions, keep software updated, and maintain regular backups.</p>
-        <h4>8. Data Retention</h4>
-        <ul>
-          <li>Death list / immortality data — until manually removed via config or commands</li>
-          <li>Temporary cooldowns — memory-only / restart-cleared</li>
-          <li>Website access logs — limited retention period</li>
-        </ul>
-        <p>Server operators control retention of locally stored Plugin data.</p>
-        <h4>9. Third-Party Services</h4>
-        <p>Noonblade may interact with third-party services including: Vercel (website hosting), and Mojang/Microsoft APIs (skin and profile lookup). Each third-party service operates under its own privacy policies and terms.</p>
-        <h4>10. Cookies &amp; Tracking</h4>
-        <p><strong>Plugin:</strong> The Plugin itself does not use browser cookies, advertising trackers, or behavioral profiling systems. <strong>Website:</strong> Official websites may use minimal browser storage for functionality. No advertising or cross-site tracking technologies are intentionally used.</p>
-        <h4>11. Your Rights</h4>
-        <p>Depending on your jurisdiction, you may have rights including access, correction, deletion, restriction of processing, data portability, objection, and withdrawal of consent. Because most Plugin data is controlled locally by server operators, many requests should be directed to the relevant server operator.</p>
-        <h4>12. California Privacy Rights (CCPA/CPRA)</h4>
-        <p>California residents may have additional rights under applicable law. Noonblade does not knowingly sell personal information or share personal information for cross-context behavioral advertising. Most Plugin-related data remains under the direct control of server operators.</p>
-        <h4>13. Children's Privacy (COPPA)</h4>
-        <p>Noonblade is intended for server operators and administrators, not children under 13. We do not knowingly collect personal information from children. Server operators remain responsible for their own legal compliance relating to player communities.</p>
-        <h4>14. International Data Transfers</h4>
-        <p>Plugin data generally remains on infrastructure controlled by server operators. Some third-party services used by Noonblade may process requests internationally depending on their own infrastructure and policies.</p>
-        <h4>15. Changes to This Policy</h4>
-        <p>We may update this Privacy Policy periodically. Material changes may be announced through GitHub, Discord, or official documentation pages. The updated revision date will appear at the top of this document. Continued use of Noonblade after changes become effective constitutes acceptance of the revised policy.</p>
-        <h4>16. Contact Information</h4>
-        <p>For questions regarding this Privacy Policy:<br>Discord: <a href="https://discord.com/channels/1500056296861204531/1535241074862198854">Noonblade SMP Discord</a><br>GitHub: <a href="https://github.com/Swafts/noonblade">github.com/Swafts/noonblade</a></p>
-        <p>Noonblade SMP is not affiliated with Mojang AB or Microsoft Corporation.</p>
-      </div>
-    </details>
-    <details class="legal-item">
-      <summary>Terms of Service</summary>
-      <div class="legal-body">
-        <h3>Terms of Service</h3>
-        <p class="legal-meta">Effective Date: August 8, 2026<br>Last Updated: August 8, 2026<br>Version: 1.0</p>
-        <p><strong>Important:</strong> Please read these Terms carefully before downloading, installing, or using Noonblade SMP ("Noonblade"). By using the Plugin, you agree to be legally bound by these Terms in their entirety.</p>
-        <h4>Table of Contents</h4>
-        <ol>
-          <li>Definitions</li>
-          <li>Eligibility</li>
-          <li>Acceptance of Terms</li>
-          <li>License Grant</li>
-          <li>Intellectual Property Rights</li>
-          <li>Permitted Use</li>
-          <li>Prohibited Conduct</li>
-          <li>Configuration and Data Ownership</li>
-          <li>Third-Party Services and Dependencies</li>
-          <li>Updates, Maintenance, and Support</li>
-          <li>Disclaimer of Warranties</li>
-          <li>Limitation of Liability</li>
-          <li>Indemnification</li>
-          <li>Termination</li>
-          <li>Dispute Resolution</li>
-          <li>Governing Law</li>
-          <li>General Provisions</li>
-          <li>Contact Information</li>
-        </ol>
-        <h4>1. Definitions</h4>
-        <p>"Plugin", "Noonblade", or "Noonblade SMP" refers to the Noonblade SMP software, including all binaries, source code, APIs, configuration files, assets, documentation, and associated materials. "Developer", "Licensor", "We", or "Us" refers to Swafts. "You" or "Licensee" refers to any person or legal entity that downloads, installs, configures, operates, or interacts with the Plugin. "Server" means any Minecraft server instance using the Plugin. "Commercial Use" means any use intended for commercial advantage, monetization, resale, paid hosting, SaaS distribution, licensing, or revenue generation. "Redistribution" means sharing, mirroring, uploading, republishing, bundling, transmitting, or otherwise distributing the Plugin or any modified version to third parties.</p>
-        <h4>2. Eligibility</h4>
-        <p>You must be at least 13 years old, or the minimum age required by your jurisdiction to consent to digital services. If You are using the Plugin on behalf of an organization, You represent that You have authority to bind that organization to these Terms.</p>
-        <h4>3. Acceptance of Terms</h4>
-        <p>You accept these Terms by downloading the Plugin, installing the Plugin, running the Plugin, or accessing the source repository or compiled releases. If You do not agree to these Terms, You must immediately stop using the Plugin and delete all copies from Your systems.</p>
-        <h4>4. License Grant</h4>
-        <p><strong>4.1 Limited License.</strong> Subject to these Terms and the Noonblade Source-Available License, You are granted a non-exclusive, non-transferable, non-sublicensable, revocable license to run the Plugin on Minecraft servers You own or directly operate, configure the Plugin using documented features, view and study the source code, and modify the source code solely for private, non-commercial use.</p>
-        <p><strong>4.2 Restrictions.</strong> You may NOT redistribute the Plugin in any form, rehost releases or source archives, sell or commercially exploit the Plugin, offer the Plugin as part of a paid hosting package, bundle the Plugin with commercial products or services, create public forks for redistribution, remove copyright notices, circumvent licensing restrictions, or misrepresent authorship or ownership.</p>
-        <p><strong>4.3 Permission Requests.</strong> Written permission is required for commercial use, redistribution, hosted distribution, and public derivative distribution. Permission requests may be submitted through the official Discord server.</p>
-        <p><strong>4.4 License Keys.</strong> Use of the Plugin requires a valid, activated license key. Each key is bound to exactly one server and may not be shared. Unbound keys expire automatically and keys may be revoked at the Developer's discretion.</p>
-        <h4>5. Intellectual Property Rights</h4>
-        <p>All rights, title, and interest in the Plugin remain exclusively owned by the Developer, including source code, compiled binaries, APIs, documentation, website assets, branding, and logos. "Noonblade SMP" and related branding are protected identifiers of the Developer. Any feedback, bug reports, suggestions, or ideas submitted to the Developer may be used without restriction or compensation.</p>
-        <h4>6. Permitted Use</h4>
-        <p>Permitted use cases include private servers, community or friend-group servers, testing, development, and demonstration. All usage must comply with the Mojang EULA, Microsoft policies, hosting provider terms, and applicable law.</p>
-        <h4>7. Prohibited Conduct</h4>
-        <p>You may NOT use the Plugin to violate Minecraft platform policies, manipulate public server rankings fraudulently, mislead users for financial gain, exploit vulnerabilities, attack third-party infrastructure, violate privacy or data protection law, facilitate scams or phishing, or distribute malware or malicious payloads.</p>
-        <h4>8. Configuration and Data Ownership</h4>
-        <p>You retain ownership of all Plugin Data stored on Your systems, including configuration files, databases, backups, and logs. Noonblade primarily stores data locally on Your infrastructure. The Developer does not receive or access Your server data unless explicitly provided by You for support purposes. You are solely responsible for maintaining backups and disaster recovery procedures.</p>
-        <h4>9. Third-Party Services and Dependencies</h4>
-        <p>Noonblade may interact with third-party services, including Mojang APIs for skin/profile retrieval and Vercel for website hosting. Third-party services operate under their own terms and privacy policies. We are not responsible for outages, changes, or issues caused by third-party services.</p>
-        <h4>10. Updates, Maintenance, and Support</h4>
-        <p>Updates are provided voluntarily and may include security patches, bug fixes, compatibility updates, and feature additions. We do not guarantee future updates or compatibility. Support is provided on a best-effort basis through the official Discord server and GitHub. Major changes may occur between releases; backward compatibility is not guaranteed.</p>
-        <h4>11. Disclaimer of Warranties</h4>
-        <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE PLUGIN IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND. We DISCLAIM all warranties including merchantability, fitness for a particular purpose, non-infringement, compatibility, security, reliability, and availability. Use of the Plugin is entirely at Your own risk.</p>
-        <h4>12. Limitation of Liability</h4>
-        <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE DEVELOPER SHALL NOT BE LIABLE FOR server crashes, data loss, lost revenue, hosting penalties, player disputes, corruption, downtime, security incidents, indirect damages, or consequential damages. Where liability cannot legally be excluded, total liability shall not exceed the amount paid by You for the Plugin, if any.</p>
-        <h4>13. Indemnification</h4>
-        <p>You agree to indemnify and hold harmless the Developer from any claims, damages, losses, or expenses arising out of Your use of the Plugin, Your violation of these Terms, or Your violation of any law or the rights of a third party.</p>
-        <h4>14. Termination</h4>
-        <p>We may terminate or suspend Your license at any time, including for violation of these Terms. Upon termination, Your right to use the Plugin immediately ceases. Sections 5, 11, 12, 13, 15, and 16 survive termination.</p>
-        <h4>15. Dispute Resolution</h4>
-        <p>Any disputes arising under these Terms shall first be resolved through good-faith negotiation. If not resolved, disputes shall be resolved in the courts of the Developer's jurisdiction.</p>
-        <h4>16. Governing Law</h4>
-        <p>These Terms shall be governed by and interpreted under the laws applicable to the Developer's jurisdiction, without regard to conflict-of-law principles.</p>
-        <h4>17. General Provisions</h4>
-        <p>If any provision of these Terms is determined unenforceable, the remaining provisions shall remain in full force and effect. These Terms constitute the entire agreement between You and the Developer regarding the Plugin.</p>
-        <h4>18. Contact Information</h4>
-        <p>For questions regarding these Terms:<br>Discord: <a href="https://discord.com/channels/1500056296861204531/1535241074862198854">Noonblade SMP Discord</a><br>GitHub: <a href="https://github.com/Swafts/noonblade">github.com/Swafts/noonblade</a></p>
-        <p>Noonblade SMP is not affiliated with Mojang AB or Microsoft Corporation.</p>
-      </div>
-    </details>
-  </div>
-  <div class="footer-base">Noonblade SMP · Premium Minecraft SMP management plugin · Not affiliated with Mojang or Microsoft</div>
-</footer>
-
-<div class="toast" id="toast">Copied!</div>
-
-<div class="modal-overlay" id="keyModal">
-  <div class="modal">
-    <div class="modal-head">
-      <div class="modal-logo"><img src="froke-smp.png" alt="Noonblade"></div>
-      <div class="modal-title-block">
-        <div class="modal-name">Noonblade SMP</div>
-        <div class="modal-tag">Official Server Plugin &middot; v1.3.4</div>
-      </div>
-      <button class="modal-close" id="keyModalClose" aria-label="Close">&times;</button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-desc">One menu for everything on your SMP &mdash; all settings and tools in one clean GUI.</div>
-      <div class="modal-actions">
-        <div class="modal-error" id="keyError">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-          <span>Incorrect key. Please try again.</span>
-        </div>
-        <div class="modal-key-row">
-          <input type="text" id="keyInput" class="modal-input" placeholder="Enter license key" autocomplete="off" spellcheck="false">
-          <button class="modal-btn modal-btn-primary" id="keySubmit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</button>
-        </div>
-        <div class="modal-key-hint">Need a license key?</div>
-        <button class="modal-btn modal-btn-ghost" id="keyDiscordBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.32 4.37a19.8 19.8 0 0 0-4.93-1.51 13.77 13.77 0 0 0-.64 1.28 18.27 18.27 0 0 0-5.5 0 12.64 12.64 0 0 0-.64-1.28 19.74 19.74 0 0 0-4.93 1.51C.53 9.05-.32 13.58.1 18.06a19.9 19.9 0 0 0 6.02 3.03 14.46 14.46 0 0 0 1.24-2 12.82 12.82 0 0 1-1.95-.94c.16-.12.32-.24.48-.37a14.18 14.18 0 0 0 12.12 0c.16.13.32.25.48.37a12.82 12.82 0 0 1-1.95.94 14.4 14.4 0 0 0 1.24 2 19.87 19.87 0 0 0 6.02-3.03c.5-5.19-.85-9.69-3.6-13.69zM8.02 15.33c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.96-2.42 2.16-2.42s2.17 1.09 2.16 2.42c0 1.34-.96 2.42-2.16 2.42zm7.96 0c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.95-2.42 2.16-2.42s2.17 1.09 2.16 2.42c0 1.34-.95 2.42-2.16 2.42z"/></svg>Join Discord Community</button>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="toast" id="toast">Server IP copied!</div>
 
 <script>
 const nav=document.getElementById('nav');
@@ -591,85 +269,13 @@ for(let i=0;i<60;i++){
 }
 
 const toast=document.getElementById('toast');
-document.querySelectorAll('.table code').forEach(code=>{
-  code.addEventListener('click',()=>{
-    navigator.clipboard.writeText(code.textContent.trim());
-    toast.classList.add('show');
-    clearTimeout(toast._t);
-    toast._t=setTimeout(()=>toast.classList.remove('show'),1400);
-  });
-});
-
-const API_URL='https://swimming-substances-heather-documented.trycloudflare.com/api/check';
-const modal=document.getElementById('keyModal');
-const input=document.getElementById('keyInput');
-const errEl=document.getElementById('keyError');
-const errText=errEl.querySelector('span');
-const submit=document.getElementById('keySubmit');
-let downloading=false;
-let pendingFile='versions/Noonblade-1.3.4.jar';
-let pendingName='Noonblade-1.3.4.jar';
-
-function openModal(){errEl.classList.remove('show');input.value='';modal.classList.add('show');input.focus();}
-function closeModal(){modal.classList.remove('show');}
-
-document.querySelectorAll('[data-download]').forEach(a=>{
-  a.addEventListener('click',e=>{e.preventDefault();pendingFile='versions/Noonblade-1.3.4.jar';pendingName='Noonblade-1.3.4.jar';openModal();});
-});
-document.querySelectorAll('[data-version-download]').forEach(a=>{
-  a.addEventListener('click',e=>{e.preventDefault();pendingFile=a.getAttribute('data-version-download');pendingName=pendingFile.split('/').pop();openModal();});
-});
-document.getElementById('keyModalClose').addEventListener('click',closeModal);
-const DISCORD_URL='https://discord.com/channels/1500056296861204531/1535241074862198854';
-document.getElementById('keyDiscordBtn').addEventListener('click',()=>window.open(DISCORD_URL,'_blank'));
-modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
-input.addEventListener('keydown',e=>{if(e.key==='Enter')verifyKey();});
-submit.addEventListener('click',verifyKey);
-
-async function verifyKey(){
-  if(downloading)return;
-  const key=input.value.trim();
-  if(!key){errText.textContent='Please enter a key.';errEl.classList.add('show');return;}
-  submit.disabled=true;
-  submit.textContent='Checking...';
-  errEl.classList.remove('show');
-  try{
-    const res=await fetch(API_URL+'?key='+encodeURIComponent(key));
-    const data=await res.json();
-    if(data.valid){
-      downloadFile();
-    }else{
-      errText.textContent='Incorrect key. Please try again.';
-      errEl.classList.add('show');
-      submit.disabled=false;
-      submit.textContent='Download';
-      input.focus();
-    }
-  }catch(err){
-    errText.textContent='Could not reach license server. Try again in a moment.';
-    errEl.classList.add('show');
-    submit.disabled=false;
-    submit.textContent='Download';
-  }
-}
-
-function downloadFile(){
-  submit.disabled=false;
-  submit.textContent='Download';
-  downloading=true;
-  const a=document.createElement('a');
-  a.href=pendingFile;
-  a.download=pendingName;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  closeModal();
-  toast.textContent='Downloading...';
+const ipBox=document.getElementById('ipBox');
+ipBox.addEventListener('click',()=>{
+  navigator.clipboard.writeText(ipBox.textContent.trim());
   toast.classList.add('show');
   clearTimeout(toast._t);
-  toast._t=setTimeout(()=>toast.classList.remove('show'),1600);
-  setTimeout(()=>{downloading=false;},1500);
-}
+  toast._t=setTimeout(()=>toast.classList.remove('show'),1400);
+});
 </script>
 </body>
 </html>
